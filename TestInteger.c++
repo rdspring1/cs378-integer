@@ -97,10 +97,15 @@ struct TestInteger : CppUnit::TestFixture {
 	void test_shift_left_operator_negative ()
 	{
 		Integer<int> a = Integer<int>(234);
-		Integer<int> b = Integer<int>(2);
-		Integer<int>& p = a <<= -2;
-		CPPUNIT_ASSERT(a == p);
-		CPPUNIT_ASSERT(a == b);
+		try
+		{
+			a <<= -2;
+			CPPUNIT_ASSERT(false);
+		}
+		catch (std::invalid_argument& e) 
+		{
+			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined"));
+		}
 	}
 
 	// ------------------
@@ -162,10 +167,15 @@ struct TestInteger : CppUnit::TestFixture {
 	void test_shift_right_operator_negative ()
 	{
 		Integer<int> a = Integer<int>(234);
-		Integer<int> b = Integer<int>(23400);
-		Integer<int>& p = a >>= -2;
-		CPPUNIT_ASSERT(a == p);
-		CPPUNIT_ASSERT(a == b);
+		try
+		{
+			a >>= -2;
+			CPPUNIT_ASSERT(false);
+		}
+		catch (std::invalid_argument& e) 
+		{
+			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined"));
+		}
 	}
 
 	// -----------
@@ -417,7 +427,7 @@ struct TestInteger : CppUnit::TestFixture {
 			divides_digits(a, a + 4, b, b + 1, x);
 			CPPUNIT_ASSERT(false);
 		}
-		catch (std::exception & e)
+		catch (std::invalid_argument& e) 
 		{
 			CPPUNIT_ASSERT(strcmp(e.what(), "Division by zero is undefined"));
 		}
@@ -456,11 +466,12 @@ struct TestInteger : CppUnit::TestFixture {
 			a /= b;
 			CPPUNIT_ASSERT(false);
 		}
-		catch (std::exception & e)
+		catch (std::invalid_argument& e) 
 		{
 			CPPUNIT_ASSERT(strcmp(e.what(), "Division by zero is undefined"));
 		}
 	}
+
 	// -----------
 	// constructor
 	// -----------
@@ -743,6 +754,36 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 	}
 
+	void test_pow_e_b_zero () 
+	{
+		try 
+		{
+			Integer<int>       x = 0;
+			const int          e = 0;
+			x.pow(e);
+			CPPUNIT_ASSERT(false);
+		}
+		catch (std::invalid_argument& e) 
+		{
+			CPPUNIT_ASSERT(strcmp(e.what(), "Exponent and Base cannot be zero"));
+		}
+	}
+
+	void test_pow_negative () 
+	{
+		try 
+		{
+			Integer<int>       x = 2;
+			const int          e = -1;
+			x.pow(e);
+			CPPUNIT_ASSERT(false);
+		}
+		catch (std::invalid_argument& e) 
+		{
+			CPPUNIT_ASSERT(strcmp(e.what(), "Exponent cannot be less than zero"));
+		}
+	}
+
 	void test_pow_zero () 
 	{
 		try 
@@ -776,6 +817,76 @@ struct TestInteger : CppUnit::TestFixture {
 			CPPUNIT_ASSERT(false);
 		}
 	}
+
+	// ---
+	// less_than
+	// ---
+
+	void test_less_than ()
+	{
+		Integer<int> a = Integer<int>(12);
+		Integer<int> b = Integer<int>(144);
+		CPPUNIT_ASSERT(a < b);
+	}
+
+	void test_less_than_zero ()
+	{
+		Integer<int> a = Integer<int>(12);
+		Integer<int> b = Integer<int>(0);
+		CPPUNIT_ASSERT(!(a < b));
+	}
+
+	void test_less_than_negative ()
+	{
+		Integer<int> a = Integer<int>(12);
+		Integer<int> b = Integer<int>(-12);
+		CPPUNIT_ASSERT(!(a < b));
+	}
+
+	// ---
+	// mod_equal
+	// ---
+
+	void test_mod_equal ()
+	{
+		Integer<int> a = Integer<int>(12);
+		Integer<int> b = Integer<int>(5);
+		Integer<int> c = Integer<int>(2);
+		Integer<int>& p = a %= b;
+		CPPUNIT_ASSERT(a == p);
+		CPPUNIT_ASSERT(a == c);
+	}
+
+	void test_mod_zero ()
+	{
+		Integer<int> a = Integer<int>(12);
+		Integer<int> b = Integer<int>(0);
+		try
+		{
+			a %= b;
+			CPPUNIT_ASSERT(false);
+		}
+		catch (std::invalid_argument& e) 
+		{
+			CPPUNIT_ASSERT(strcmp(e.what(), "Divisor cannot be less than or equal to zero"));
+		}
+	}
+
+	void test_mod_negative ()
+	{
+		Integer<int> a = Integer<int>(12);
+		Integer<int> b = Integer<int>(-1);
+		try
+		{
+			a %= b;
+			CPPUNIT_ASSERT(false);
+		}
+		catch (std::invalid_argument& e) 
+		{
+			CPPUNIT_ASSERT(strcmp(e.what(), "Divisor cannot be less than or equal to zero"));
+		}
+	}
+
 	// -----
 	// suite
 	// -----
@@ -834,8 +945,19 @@ struct TestInteger : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_output_large);
 	CPPUNIT_TEST(test_pow_method);
 	CPPUNIT_TEST(test_pow_function);
+	CPPUNIT_TEST(test_pow_e_b_zero);
+	CPPUNIT_TEST(test_pow_negative);
 	CPPUNIT_TEST(test_pow_zero);
 	CPPUNIT_TEST(test_pow_one);
+	CPPUNIT_TEST(test_less_than);
+	CPPUNIT_TEST(test_less_than_zero);
+	CPPUNIT_TEST(test_less_than_negative);
+	CPPUNIT_TEST(test_mod_equal);
+	CPPUNIT_TEST(test_mod_zero);
+	CPPUNIT_TEST(test_mod_negative);
+	//CPPUNIT_TEST(test_valid);
+	//CPPUNIT_TEST(test_valid_2);
+	//CPPUNIT_TEST(test_valid_3);
 	CPPUNIT_TEST_SUITE_END();};
 
 // ----
