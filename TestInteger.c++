@@ -37,42 +37,207 @@ To test the program:
 // -----------
 
 struct TestInteger : CppUnit::TestFixture {
+
     // -----------------
     // shift_left_digits
     // -----------------
 
-    void test_shift_left_digits () {
+    void test_shift_left_digits () 
+    {
         const int a[] = {2, 3, 4};
         const int b[] = {2, 3, 4, 0, 0};
               int x[10];
         const int* p = shift_left_digits(a, a + 3, 2, x);
         CPPUNIT_ASSERT((p - x) == 5);
-        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));}
+        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));
+    }
+
+    void test_shift_left_digits_none ()
+    {
+        const int a[] = {2, 3, 4};
+        const int b[] = {2, 3, 4};
+              int x[10];
+        const int* p = shift_left_digits(a, a + 3, 0, x);
+        CPPUNIT_ASSERT((p - x) == 3);
+        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));
+    }
+
+    void test_shift_left_digits_negative ()
+    {
+        const int a[] = {2, 3, 4};
+        const int b[] = {2};
+              int x[10];
+        const int* p = shift_left_digits(a, a + 3, -2, x);
+        CPPUNIT_ASSERT((p - x) == 1);
+        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));
+    }
+
+    // -----------------
+    // shift_left_operator
+    // -----------------
+
+    void test_shift_left_operator ()
+    {
+	Integer<int> a = Integer<int>(234);
+	Integer<int> b = Integer<int>(23400);
+        Integer<int>& p = a <<= 2;
+	CPPUNIT_ASSERT(a == p);
+	CPPUNIT_ASSERT(a == b);
+    }
+
+    void test_shift_left_operator_none ()
+    {
+	Integer<int> a = Integer<int>(234);
+	Integer<int> b = Integer<int>(234);
+        Integer<int>& p = a <<= 0;
+	CPPUNIT_ASSERT(a == p);
+	CPPUNIT_ASSERT(a == b);
+    }
+
+    void test_shift_left_operator_negative ()
+    {
+	Integer<int> a = Integer<int>(234);
+	Integer<int> b = Integer<int>(2);
+        Integer<int>& p = a <<= -2;
+	CPPUNIT_ASSERT(a == p);
+	CPPUNIT_ASSERT(a == b);
+    }
 
     // ------------------
     // shift_right_digits
     // ------------------
 
-    void test_shift_right_digits () {
+    void test_shift_right_digits () 
+    {
         const int a[] = {2, 3, 4};
         const int b[] = {2};
               int x[10];
         const int* p = shift_right_digits(a, a + 3, 2, x);
         CPPUNIT_ASSERT((p - x) == 1);
-        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));}
+        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));
+    }
+
+    void test_shift_right_digits_none () 
+    {
+        const int a[] = {2, 3, 4};
+        const int b[] = {2, 3, 4};
+              int x[10];
+        const int* p = shift_right_digits(a, a + 3, 0, x);
+        CPPUNIT_ASSERT((p - x) == 3);
+        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));
+    }
+
+    void test_shift_right_digits_negative () 
+    {
+        const int a[] = {2, 3, 4};
+        const int b[] = {2, 3, 4, 0, 0};
+              int x[10];
+        const int* p = shift_right_digits(a, a + 3, -2, x);
+        CPPUNIT_ASSERT((p - x) == 5);
+        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));
+    }
+
+    // -----------------
+    // shift_right_operator
+    // -----------------
+
+    void test_shift_right_operator ()
+    {
+	Integer<int> a = Integer<int>(234);
+	Integer<int> b = Integer<int>(2);
+        Integer<int>& p = a >>= 2;
+	CPPUNIT_ASSERT(a == p);
+	CPPUNIT_ASSERT(a == b);
+    }
+
+    void test_shift_right_operator_none ()
+    {
+	Integer<int> a = Integer<int>(234);
+	Integer<int> b = Integer<int>(234);
+        Integer<int>& p = a >>= 0;
+	CPPUNIT_ASSERT(a == p);
+	CPPUNIT_ASSERT(a == b);
+    }
+
+    void test_shift_right_operator_negative ()
+    {
+	Integer<int> a = Integer<int>(234);
+	Integer<int> b = Integer<int>(23400);
+        Integer<int>& p = a >>= -2;
+	CPPUNIT_ASSERT(a == p);
+	CPPUNIT_ASSERT(a == b);
+    }
 
     // -----------
     // plus_digits
     // -----------
 
-    void test_plus_digits () {
+    void test_plus_digits () 
+    {
         const int a[] = {2, 3, 4};
         const int b[] = {5, 6, 7};
         const int c[] = {8, 0, 1};
               int x[10];
         const int* p = plus_digits(a, a + 3, b, b + 3, x);
         CPPUNIT_ASSERT(p - x == 3);
-        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, c));}
+        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, c));
+    }
+
+    void test_plus_digits_medium () 
+    {
+        const int a[] = {4, 0, 3, 5};
+        const int b[] = {2, 1, 6};
+        const int c[] = {4, 2, 5, 1};
+              int x[10];
+        const int* p = plus_digits(a, a + 4, b, b + 3, x);
+        CPPUNIT_ASSERT(p - x == 4);
+        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, c));
+    }
+
+    void test_plus_digits_large () 
+    {
+        const int a[] = {7, 7, 0, 8, 3};
+        const int b[] = {7, 8, 7, 0, 5};
+        const int c[] = {1, 5, 5, 7, 8, 8};
+              int x[10];
+        const int* p = plus_digits(a, a + 5, b, b + 5, x);
+        CPPUNIT_ASSERT(p - x == 6);
+        CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, c));
+    }
+
+    // ------------
+    // plus_operator
+    // ------------
+
+    void test_plus_equal_operator ()
+    {
+	Integer<int> a = Integer<int>(567);
+	Integer<int> b = Integer<int>(243);
+	Integer<int> c = Integer<int>(801);
+	Integer<int>& p = a += b;
+	CPPUNIT_ASSERT(a == p);
+	CPPUNIT_ASSERT(a == c);
+    }
+
+    void test_plus_equal_operator_medium ()
+    {
+	Integer<int> a = Integer<int>(2013);
+	Integer<int> b = Integer<int>(2014);
+	Integer<int> c = Integer<int>(4027);
+	Integer<int>& p = a += b;
+	CPPUNIT_ASSERT(a == p);
+	CPPUNIT_ASSERT(a == c);
+    }
+
+    void test_plus_equal_operator_large ()
+    {
+	Integer<int> a = Integer<int>(12345);
+	Integer<int> b = Integer<int>(54321);
+	Integer<int> c = Integer<int>(66666);
+	Integer<int>& p = a += b;
+	CPPUNIT_ASSERT(a == p);
+	CPPUNIT_ASSERT(a == c);
+    }
 
     // ------------
     // minus_digits
@@ -232,8 +397,23 @@ struct TestInteger : CppUnit::TestFixture {
 
     CPPUNIT_TEST_SUITE(TestInteger);
     CPPUNIT_TEST(test_shift_left_digits);
+    CPPUNIT_TEST(test_shift_left_digits_none);
+    CPPUNIT_TEST(test_shift_left_digits_negative);
+    CPPUNIT_TEST(test_shift_left_operator);
+    CPPUNIT_TEST(test_shift_left_operator_none);
+    CPPUNIT_TEST(test_shift_left_operator_negative);
     CPPUNIT_TEST(test_shift_right_digits);
+    CPPUNIT_TEST(test_shift_right_digits_none);
+    CPPUNIT_TEST(test_shift_right_digits_negative);
+    CPPUNIT_TEST(test_shift_right_operator);
+    CPPUNIT_TEST(test_shift_right_operator_none);
+    CPPUNIT_TEST(test_shift_right_operator_negative);
     CPPUNIT_TEST(test_plus_digits);
+    CPPUNIT_TEST(test_plus_digits_medium);
+    CPPUNIT_TEST(test_plus_digits_large);
+    CPPUNIT_TEST(test_plus_equal_operator);
+    CPPUNIT_TEST(test_plus_equal_operator_medium);
+    CPPUNIT_TEST(test_plus_equal_operator_large);
     CPPUNIT_TEST(test_minus_digits);
     CPPUNIT_TEST(test_multiplies_digits);
     CPPUNIT_TEST(test_divides_digits);
