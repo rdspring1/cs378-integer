@@ -78,6 +78,44 @@ struct TestInteger : CppUnit::TestFixture {
 	}
 
 	// -----------------
+	// inverse_shift_left_digits
+	// -----------------
+
+	void test_inverse_shift_left_digits () 
+	{
+		const int a[] = {2, 3, 4};
+		const int b[] = {0, 0, 2, 3, 4};
+		int x[10];
+		const int* p = inverse_shift_left_digits(a, a + 3, 2, x);
+		CPPUNIT_ASSERT((p - x) == 5);
+		CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));
+	}
+
+	void test_inverse_shift_left_digits_none ()
+	{
+		const int a[] = {2, 3, 4};
+		const int b[] = {2, 3, 4};
+		int x[10];
+		const int* p = inverse_shift_left_digits(a, a + 3, 0, x);
+		CPPUNIT_ASSERT((p - x) == 3);
+		CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));
+	}
+
+	void test_inverse_shift_left_digits_negative ()
+	{
+		const int a[] = {2, 3, 4};
+		int x[10];
+		try {
+			inverse_shift_left_digits(a, a + 3, -2, x);
+			CPPUNIT_ASSERT(false);
+		}
+		catch (std::invalid_argument& e) 
+		{
+			CPPUNIT_ASSERT(strcmp(e.what(), "Inverse Shift Left by a negative number is undefined") == 0);
+		}
+	}
+
+	// -----------------
 	// shift_left_operator
 	// -----------------
 
@@ -905,6 +943,9 @@ struct TestInteger : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_shift_left_digits);
 	CPPUNIT_TEST(test_shift_left_digits_none);
 	CPPUNIT_TEST(test_shift_left_digits_negative);
+	CPPUNIT_TEST(test_inverse_shift_left_digits);
+	CPPUNIT_TEST(test_inverse_shift_left_digits_none);
+	CPPUNIT_TEST(test_inverse_shift_left_digits_negative);
 	CPPUNIT_TEST(test_shift_left_operator);
 	CPPUNIT_TEST(test_shift_left_operator_none);
 	CPPUNIT_TEST(test_shift_left_operator_negative);

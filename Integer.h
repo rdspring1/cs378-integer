@@ -83,6 +83,42 @@ OI shift_right_digits (II b, II e, int n, OI x)
     return x;
 }
 
+// ------------------
+// inverse_shift_left_digits
+// ------------------
+
+/**
+ * @param b an iterator to the beginning of an input  sequence (inclusive)
+ * @param e an iterator to the end       of an input  sequence (exclusive)
+ * @param x an iterator to the beginning of an output sequence (inclusive)
+ * @return  an iterator to the end       of an output sequence (exclusive)
+ * the sequences are of decimal digits
+ * output the inverse of the shift left of the input sequence into the output sequence
+ * ([b, e) >> n) => x
+ */
+template <typename II, typename OI>
+OI inverse_shift_left_digits (II b, II e, int n, OI x) 
+{
+    if(n < 0)
+        throw std::invalid_argument("Inverse Shift Left by a negative number is undefined");
+
+    // Shift x pointer
+    for(int i = 0; i < n; ++i)
+    {
+        *x = 0;
+        ++x;
+    }	
+
+    // Transfer values to x
+    while(b != e)
+    {
+        *x = *b;
+        ++b;
+        ++x;
+    }
+    return x;
+}
+
 // -----------
 // plus_digits
 // -----------
@@ -248,9 +284,10 @@ OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
  * ([b1, e1) * [b2, e2)) => x
  */
 template <typename II1, typename II2, typename OI>
-OI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
-    // <your code>
-    return x;}
+OI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) 
+{
+    return x;
+}
 
 // --------------
 // divides_digits
