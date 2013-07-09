@@ -36,6 +36,7 @@ OI shift_left_digits (II b, II e, int n, OI x)
     if(n < 0)
         throw std::invalid_argument("Shift Left by a negative number is undefined");
     
+    // Transfer values to x
     while(b != e)
     {
         *x = *b;
@@ -43,6 +44,7 @@ OI shift_left_digits (II b, II e, int n, OI x)
         ++x;
     }
 
+    // Shift x pointer
     for(int i = 0; i < n; ++i)
     {
         *x = 0;
@@ -70,6 +72,7 @@ OI shift_right_digits (II b, II e, int n, OI x)
     if(n < 0)
         throw std::invalid_argument("Shift Right by a negative number is undefined");
 
+    // Transfer values to x
     e -= n;
     while(b != e)
     {
@@ -96,9 +99,57 @@ OI shift_right_digits (II b, II e, int n, OI x)
  * ([b1, e1) + [b2, e2)) => x
  */
 template <typename II1, typename II2, typename OI>
-OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
-    // <your code>
-    return x;}
+OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) 
+{
+    // II1 digit and II2 digit
+    int carry = 0;
+    while(b1 != e1 && b2 != e2)
+    {
+        int value = *b1 + *b2 + carry;
+        if(value >= 10)
+	{
+	    *x = value - 10;
+	    carry = 1;
+	}
+	else
+	{
+	    *x = value;
+	    carry = 0;
+	}
+	++x;
+	++b1;
+	++b2;   
+    }
+
+    // II1 digit
+    while(b1 != e1)
+    {
+        *x = *b1 + carry;
+	if(carry == 1)
+	    carry = 0;
+	++x;
+	++b1;
+    }
+
+    // II2 digit
+    while(b2 != e2)
+    {
+        *x = *b2 + carry;
+	if(carry == 1)
+	    carry = 0;
+	++x;
+	++b2;
+    }
+
+    // Carry Value
+    if(carry == 1)
+    {
+	*x = carry;
+	++x;
+    }
+
+    return x;
+}
 
 // ------------
 // minus_digits
@@ -116,9 +167,70 @@ OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
  * ([b1, e1) - [b2, e2)) => x
  */
 template <typename II1, typename II2, typename OI>
-OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
-    // <your code>
-    return x;}
+OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) 
+{
+    // II1 digit and II2 digit
+    bool borrow = false;
+    while(b1 != e1 && b2 != e2)
+    {
+	int lhs = *b1;
+	if(borrow)
+	{
+	    if(lhs == 0)
+	    {
+	    	lhs = 9;
+	    }
+	    else
+	    {
+		lhs -= 1;
+		borrow = false;
+	    }
+	}
+
+	if(lhs < *b2)
+	{
+	    borrow = true;
+	    *x = lhs + 10 - *b2;
+	}
+	else
+	{
+	    *x = lhs - *b2;
+	}
+	++x;
+	++b1;
+	++b2;   
+    }
+
+    // II1 digit only
+    while(b1 != e1)
+    {
+	if(borrow)
+	{
+	    if(*b1 == 0)
+	    {
+	    	*x = 9;
+	    }
+	    else
+	    {
+		*x = *b1 - 1;
+		borrow = false;
+	    }
+	}
+	else
+	{
+	    *x = *b1;
+	}
+
+	++x;
+	++b1;
+    }
+
+    // Extra Zeros
+    while(*(x-1) == 0)
+	--x;
+
+    return x;
+}
 
 // -----------------
 // multiplies_digits
