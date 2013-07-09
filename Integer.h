@@ -11,6 +11,7 @@
 // includes
 // --------
 
+#include <algorithm> // max
 #include <cassert>   // assert
 #include <iostream>  // ostream
 #include <stdexcept> // invalid_argument
@@ -102,6 +103,16 @@ OI inverse_shift_left_digits (II b, II e, int n, OI x)
     if(n < 0)
         throw std::invalid_argument("Inverse Shift Left by a negative number is undefined");
 
+    int numelem = e - b;
+    int elem = numelem - 1;
+    // Transfer values to x
+    while(b != e)
+    {
+	--e;
+        *(x + n + elem) = *e;
+	--elem;
+    }
+
     // Shift x pointer
     for(int i = 0; i < n; ++i)
     {
@@ -109,14 +120,7 @@ OI inverse_shift_left_digits (II b, II e, int n, OI x)
         ++x;
     }	
 
-    // Transfer values to x
-    while(b != e)
-    {
-        *x = *b;
-        ++b;
-        ++x;
-    }
-    return x;
+    return x + numelem;
 }
 
 // -----------
@@ -160,9 +164,17 @@ OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
     // II1 digit
     while(b1 != e1)
     {
-        *x = *b1 + carry;
-	if(carry == 1)
+	int value = *b1 + carry;
+        if(value >= 10)
+	{
+	    *x = value - 10;
+	    carry = 1;
+	}
+	else
+	{
+	    *x = value;
 	    carry = 0;
+	}
 	++x;
 	++b1;
     }
@@ -170,9 +182,17 @@ OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
     // II2 digit
     while(b2 != e2)
     {
-        *x = *b2 + carry;
-	if(carry == 1)
+	int value = *b2 + carry;
+        if(value >= 10)
+	{
+	    *x = value - 10;
+	    carry = 1;
+	}
+	else
+	{
+	    *x = value;
 	    carry = 0;
+	}
 	++x;
 	++b2;
     }
@@ -205,6 +225,7 @@ OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 template <typename II1, typename II2, typename OI>
 OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) 
 {
+    OI cx = x;
     // II1 digit and II2 digit
     bool borrow = false;
     while(b1 != e1 && b2 != e2)
@@ -256,13 +277,12 @@ OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 	{
 	    *x = *b1;
 	}
-
 	++x;
 	++b1;
     }
 
     // Extra Zeros
-    while(*(x-1) == 0)
+    while(*(x-1) == 0 && (x - 1) != cx)
 	--x;
 
     return x;
@@ -286,7 +306,55 @@ OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 template <typename II1, typename II2, typename OI>
 OI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) 
 {
-    return x;
+    bool first = true;
+    OI cx = x;
+    int carry = 0;
+
+    // II1 digit and II2 digit
+    while(b2 != e2)
+    {
+    	OI ex = x;
+	--e2;
+	// Multiply Digit against Value1
+	for(II1 cb1 = b1; cb1 != e1; ++cb1)
+	{
+	    // Uninitialized Structures are not initialized to zero
+	    if(first)
+	    {
+	    	int value = *cb1 * *e2;
+	    	int singles_digit = value % 10;
+	    	carry = (value - singles_digit) / 10;
+	    	*ex = singles_digit + carry;
+	    }
+	    else
+	    {
+		int value = *cb1 * *e2 + *ex + carry;
+		int singles_digit = value % 10;
+		carry = (value - singles_digit) / 10;
+	    	*ex = singles_digit;
+	    }
+	    ++ex;
+	    ++cx;
+	}
+
+	if(carry != 0)
+	{
+	    *ex = carry;
+	    ++ex;
+	    ++cx;
+	}
+	carry = 0;
+
+	if(b2 != e2)
+	    inverse_shift_left_digits(x, cx, 1, x);
+
+	first = false;
+    }
+
+    // Extra Zeros
+    while((cx - 1) != x && *(cx-1) == 0)
+	--cx;
+    return cx;
 }
 
 // --------------

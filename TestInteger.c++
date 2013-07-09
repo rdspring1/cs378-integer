@@ -83,11 +83,11 @@ struct TestInteger : CppUnit::TestFixture {
 
 	void test_inverse_shift_left_digits () 
 	{
-		const int a[] = {2, 3, 4};
-		const int b[] = {0, 0, 2, 3, 4};
+		const int a[] = {4, 1};
+		const int b[] = {0, 4, 1};
 		int x[10];
-		const int* p = inverse_shift_left_digits(a, a + 3, 2, x);
-		CPPUNIT_ASSERT((p - x) == 5);
+		const int* p = inverse_shift_left_digits(a, a + 2, 1, x);
+		CPPUNIT_ASSERT((p - x) == 3);
 		CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, b));
 	}
 
@@ -374,12 +374,12 @@ struct TestInteger : CppUnit::TestFixture {
 
 	void test_multiplies_digits () 
 	{
-		const int a[] = {4, 3, 2};
-		const int b[] = {7, 6, 5};
-		const int c[] = {8, 7, 6, 2, 3, 1};
+		const int a[] = {4, 1};
+		const int b[] = {4, 1};
+		const int c[] = {6, 9, 1};
 		int x[10];
-		const int* p = multiplies_digits(a, a + 3, b, b + 3, x);
-		CPPUNIT_ASSERT(p - x == 6);
+		const int* p = multiplies_digits(a, a + 2, b, b + 2, x);
+		CPPUNIT_ASSERT(p - x == 3);
 		CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, c));
 	}
 
