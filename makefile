@@ -35,10 +35,10 @@ RunInteger: Integer.h RunInteger.c++
 	g++ -pedantic -std=c++0x -Wall RunInteger.c++ -o RunInteger
 
 RunInteger.out: RunInteger
-	valgrind RunInteger > RunInteger.out
+	valgrind ./RunInteger &> RunInteger.out
 
 TestInteger: Integer.h TestInteger.c++
 	g++ -pedantic -std=c++0x -Wall TestInteger.c++ -o TestInteger -lcppunit -ldl
 
 TestInteger.out: TestInteger
-	valgrind TestInteger > TestInteger.out
+	valgrind ./TestInteger &> TestInteger.out
