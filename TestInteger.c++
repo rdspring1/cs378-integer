@@ -20,6 +20,7 @@
 // includes
 // --------
 
+#include <iostream>
 #include <algorithm> // equal
 #include <cstring>   // strcmp
 #include <sstream>   // ostringstream
@@ -72,7 +73,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined") == 0);
 		}
 	}
 
@@ -108,7 +109,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined") == 0);
 		}
 	}
 
@@ -147,7 +148,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Right by a negative number is undefined") == 0);
 		}
 	}
 
@@ -183,7 +184,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Right by a negative number is undefined") == 0);
 		}
 	}
 
@@ -438,7 +439,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Division by zero is undefined"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Division by zero is undefined") == 0);
 		}
 	}
 
@@ -477,7 +478,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Division by zero is undefined"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Division by zero is undefined") == 0);
 		}
 	}
 
@@ -494,7 +495,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Integer()"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Integer()") == 0);
 		}
 	}
 
@@ -774,7 +775,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Exponent and Base cannot be zero"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Exponent and Base cannot be zero") == 0);
 		}
 	}
 
@@ -789,7 +790,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Exponent cannot be less than zero"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Exponent cannot be less than zero") == 0);
 		}
 	}
 
@@ -877,7 +878,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Divisor cannot be less than or equal to zero"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Divisor cannot be less than or equal to zero") == 0);
 		}
 	}
 
@@ -892,7 +893,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Divisor cannot be less than or equal to zero"));
+			CPPUNIT_ASSERT(strcmp(e.what(), "Divisor cannot be less than or equal to zero") == 0);
 		}
 	}
 

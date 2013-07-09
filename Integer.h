@@ -31,9 +31,25 @@
  * ([b, e) << n) => x
  */
 template <typename II, typename OI>
-OI shift_left_digits (II b, II e, int n, OI x) {
-    // <your code>
-    return x;}
+OI shift_left_digits (II b, II e, int n, OI x) 
+{
+    if(n < 0)
+        throw std::invalid_argument("Shift Left by a negative number is undefined");
+    
+    while(b != e)
+    {
+        *x = *b;
+        ++b;
+        ++x;
+    }
+
+    for(int i = 0; i < n; ++i)
+    {
+        *x = 0;
+        ++x;
+    }	
+    return x;
+}
 
 // ------------------
 // shift_right_digits
@@ -49,9 +65,20 @@ OI shift_left_digits (II b, II e, int n, OI x) {
  * ([b, e) >> n) => x
  */
 template <typename II, typename OI>
-OI shift_right_digits (II b, II e, int n, OI x) {
-    // <your code>
-    return x;}
+OI shift_right_digits (II b, II e, int n, OI x) 
+{
+    if(n < 0)
+        throw std::invalid_argument("Shift Right by a negative number is undefined");
+
+    e -= n;
+    while(b != e)
+    {
+        *x = *b;
+        ++b;
+        ++x;
+    }
+    return x;
+}
 
 // -----------
 // plus_digits
