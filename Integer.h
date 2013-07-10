@@ -6,7 +6,7 @@
 
 #ifndef Integer_h
 #define Integer_h
-#define SIZE 10
+#define SIZE 50000
 // --------
 // includes
 // --------
@@ -460,9 +460,9 @@ class Integer {
 			return false;
 
 		auto lb = lhs.container.begin();
-		auto le = lhs.container.end();
+		auto le = lhs.container.begin() + lhs.digits;
 		auto rb = rhs.container.begin();
-		auto re = rhs.container.end();
+		auto re = rhs.container.begin() + rhs.digits;
 		while(lb != le && rb != re)
 		{
 			if(*lb != *rb)
@@ -494,7 +494,7 @@ class Integer {
 	*/
 	friend bool operator < (const Integer& lhs, const Integer& rhs) 
 	{
-		return !greater_than_equal(lhs.container.begin(), lhs.container.end(), rhs.container.begin(), rhs.container.end());
+		return !greater_than_equal(lhs.container.begin(), lhs.container.begin() + lhs.digits, rhs.container.begin(), rhs.container.begin() + rhs.digits);
 	}
 
 	// -----------
@@ -684,10 +684,11 @@ private:
 
 	bool valid () const 
 	{
+		static Integer zero(0);
 		if(digits < 1)
 			return false;
 
-		if(digits == 1 && container[0] == 0 && negative)
+		if(*this == zero && negative)
 			return false;
 
 		return true;
@@ -713,11 +714,13 @@ private:
 			set_single(0);
 		}
 
+		auto i = container.begin();
 		while(value != 0)
 		{
-			container.push_back(value % 10);
+			*i = value % 10;
 			value /= 10;
 			++digits;
+			++i;
 		}
 	}
 
@@ -726,7 +729,7 @@ private:
 	*/
 	void set_single(int&& value)
 	{
-		this->negative = false;
+		negative = false;
 		container.clear();
 		container.push_back(value);
 		digits = 1;
@@ -735,10 +738,10 @@ private:
 	void set_digits(typename C::iterator e)
 	{
 		// Set digits
-		digits = e - this->container.begin();
+		digits = e - container.begin();
 	}
 
-	void resize(int size)
+	void resize(typename C::size_type size)
 	{	
 		// Resize the container
 		if(container.size() < 2 * size)
@@ -753,7 +756,7 @@ public:
 	/**
 	* <your documentation>
 	*/
-	Integer (int value) 
+	Integer (int value) : container(SIZE)
 	{
 		setup_integer(value);
 		assert(valid());
@@ -763,7 +766,7 @@ public:
 	* <your documentation>
 	* @throws invalid_argument if value is not a valid representation of an Integer
 	*/
-	explicit Integer (const std::string& value)
+	explicit Integer (const std::string& value) : container(SIZE)
 	{
 		static std::string zero = "0";
 		if(value == zero)
@@ -797,7 +800,7 @@ public:
 	{
 		Integer x(*this);
 		if(x != 0)
-			x.negative = !this->negative;
+			x.negative = !negative;
 		assert(valid());
 		return x;
 	}
@@ -857,46 +860,46 @@ public:
 	*/
 	Integer& operator += (const Integer& rhs) 
 	{
-		this->resize(this->digits + rhs->digits);
-		if(!this->negative && !rhs.negative)
+		resize(digits + rhs.digits);
+		if(!negative && !rhs.negative)
 		{
-			plus_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+			set_digits(plus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
-		else if(this->negative && !rhs.negative)
+		else if(negative && !rhs.negative)
 		{
-			if(abs(*this) < rhs)
+			if(-(*this) < rhs)
 			{
-				this->negative = false;
-				minus_digits(rhs.container.begin(), rhs.container.end(), *this->container.begin(), *this->container.end(), , *this->container.begin());
+				negative = false;
+				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, , container.begin()));
 			}
-			else if(abs(*this) == rhs)
+			else if(-(*this) == rhs)
 			{
 				set_single(0);
 			}
 			else
 			{
-				minus_digits(*this->container.begin(), *this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 		}
-		else if(!this->negative && rhs.negative)
+		else if(!negative && rhs.negative)
 		{
-			if(abs(*this) < rhs)
+			if(this < abs(rhs))
 			{
-				minus_digits(*this->container.begin(), *this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
-			else if(abs(*this) == rhs)
+			else if(this == rhs)
 			{
 				set_single(0);
 			}
 			else
 			{
-				this->negative = false;
-				minus_digits(rhs.container.begin(), rhs.container.end(), *this->container.begin(), *this->container.end(), , *this->container.begin());
+				negative = false;
+				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, , container.begin()));
 			}
 		}
-		else // this->negative && rhs.negative
+		else // negative && rhs.negative
 		{
-			plus_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+			set_digits(plus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		assert(valid());
 		return *this;
@@ -911,41 +914,41 @@ public:
 	*/
 	Integer& operator -= (const Integer& rhs) 
 	{
-		this->resize(this->digits + rhs->digits);
-		if(!this->negative && !rhs.negative)
+		resize(digits + rhs.digits);
+		if(!negative && !rhs.negative)
 		{
-			if(abs(*this) < rhs)
+			if(*this < rhs)
 			{
-				this->negative = true;
-				minus_digits(rhs.container.begin(), rhs.container.end(), *this->container.begin(), *this->container.end(), *this->container.begin());
+				negative = true;
+				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
 			}
-			else if(abs(*this) == rhs)
+			else if(*this == rhs)
 			{
 				set_single(0);
 			}
 			else
 			{
-				minus_digits(*this->container.begin(), *this->container.end(), rhs.container.begin(), rhs.container.end() , *this->container.begin());
+				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits , container.begin()));
 			}
 		}
-		else if((this->negative && !rhs.negative) || (!this->negative && rhs.negative))
+		else if((negative && !rhs.negative) || (!negative && rhs.negative))
 		{
-			plus_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+			set_digits(plus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
-		else // this->negative && rhs.negative
+		else // negative && rhs.negative
 		{
-			if(abs(*this) < rhs)
+			if(-(*this) < -rhs)
 			{
-				this->negative = false;
-				minus_digits(rhs.container.begin(), rhs.container.end(), *this->container.begin(), *this->container.end(), *this->container.begin());
+				negative = false;
+				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
 			}
-			else if(abs(*this) == rhs)
+			else if(-(*this) == -rhs)
 			{
 				set_single(0);
 			}
 			else
 			{
-				minus_digits(*this->container.begin(), *this->container.end(), rhs.container.begin(), rhs.container.end() , *this->container.begin());
+				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits , container.begin()));
 			}
 		}
 		assert(valid());
@@ -961,23 +964,20 @@ public:
 	*/
 	Integer& operator *= (const Integer& rhs) 
 	{
-		this->resize(this->digits + rhs->digits);
-		if(this->negative && rhs.negative)
+		resize(digits + rhs.digits);
+		if(negative && rhs.negative)
 		{
-			this->negative = false;
-			multiplies_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+			negative = false;
+			set_digits(multiplies_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
-		else if(!this->negative && rhs.negative)
+		else if(!negative && rhs.negative)
 		{
-			this->negative = true;
-			multiplies_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+			negative = true;
+			set_digits(multiplies_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
-		else // !this->negative && !!rhs.negative + this->negative && !rhs.negative
+		else // !negative && !!rhs.negative + negative && !rhs.negative
 		{
-			auto e = multiplies_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
-			int digits = e - this.container.begin();
-			if(digits == 1 && this.container[0] == 0)
-				this.container.resize(1);
+			set_digits(multiplies_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		assert(valid());
 		return *this;
@@ -993,22 +993,22 @@ public:
 	*/
 	Integer& operator /= (const Integer& rhs) 
 	{
-		this->resize(this->digits + rhs->digits);
+		resize(digits + rhs.digits);
 		if(abs(rhs) < abs(*this))
 		{
-			if(this->negative && rhs.negative)
+			if(negative && rhs.negative)
 			{
-				this->negative = false;
-				divides_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+				negative = false;
+				set_digits(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
-			else if(!this->negative && rhs.negative)
+			else if(!negative && rhs.negative)
 			{
-				this->negative = true;
-				divides_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+				negative = true;
+				set_digits(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
-			else // this->negative && rhs.negative
+			else // negative && rhs.negative
 			{
-				divides_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+				set_digits(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 		}
 		else if(abs(rhs) == abs(*this))
@@ -1054,7 +1054,8 @@ public:
 	*/
 	Integer& operator <<= (int n) 
 	{
-		shift_left_digits(this->container.begin(), this->container.end(), n, this->container.begin());
+		resize(digits + n);
+		shift_left_digits(container.begin(), container.begin() + digits, n, container.begin());
 		assert(valid());
 		return *this;
 	}
@@ -1068,7 +1069,8 @@ public:
 	*/
 	Integer& operator >>= (int n) 
 	{
-		shift_right_digits(this->container.begin(), this->container.end(), n, this->container.begin());
+		resize(digits + n);
+		shift_right_digits(container.begin(), container.begin() + digits, n, container.begin());
 		assert(valid());
 		return *this;
 	}
@@ -1083,7 +1085,7 @@ public:
 	*/
 	Integer& abs () 
 	{
-		this->negative = false;
+		negative = false;
 		assert(valid());
 		return *this;
 	}
@@ -1100,11 +1102,12 @@ public:
 	*/
 	Integer& pow (int e) 
 	{
+		static Integer zero(0);
 		// check base and exponent
-		if(e < 0)
+		if(e < zero)
 			throw std::invalid_argument("Exponent cannot be less than zero");
 
-		if(*this == 0 && e == 0)
+		if(*this == zero && e == zero)
 			throw std::invalid_argument("Exponent and Base cannot be zero");
 
 		Integer b(*this);
