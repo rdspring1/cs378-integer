@@ -6,7 +6,7 @@
 
 #ifndef Integer_h
 #define Integer_h
-#define SIZE 50000
+#define SIZE 1500
 
 // --------
 // includes
