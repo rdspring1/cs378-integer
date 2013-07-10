@@ -36,7 +36,7 @@ template <typename II, typename OI>
 OI shift_left_digits (II b, II e, int n, OI x) 
 {
 	if(n < 0)
-		throw std::invalid_argument("Shift Left by a negative number is undefined");
+		throw std::invalid_argument("The shift value cannot be negative number");
 
 	// Transfer values to x
 	while(b != e)
@@ -72,15 +72,29 @@ template <typename II, typename OI>
 OI shift_right_digits (II b, II e, int n, OI x) 
 {
 	if(n < 0)
-		throw std::invalid_argument("Shift Right by a negative number is undefined");
-
-	// Transfer values to x
-	e -= n;
-	while(b != e)
 	{
-		*x = *b;
-		++b;
-		++x;
+		throw std::invalid_argument("The shift value cannot be negative number");
+	}
+	else if(n == 0)
+	{
+		e -= n;
+		while(b != e)
+		{
+			*x = *b;
+			++b;
+			++x;
+		}
+	}
+	else
+	{
+		// Transfer values to x
+		b += n;
+		while(b != e)
+		{
+			--e;
+			*x = *e;
+			++x;
+		}
 	}
 	return x;
 }
@@ -102,7 +116,7 @@ template <typename II, typename OI>
 OI inverse_shift_left_digits (II b, II e, int n, OI x) 
 {
 	if(n < 0)
-		throw std::invalid_argument("Inverse Shift Left by a negative number is undefined");
+		throw std::invalid_argument("The shift value cannot be negative number");
 
 	int numelem = e - b;
 	int elem = numelem - 1;
@@ -432,7 +446,9 @@ bool greater_than_equal (II1 b1, II1 e1, II2 b2, II2 e2)
 	{
 		--e1;
 		--e2;
-		if(*e1 < *e2)
+		if(*e1 > *e2)
+			return true;
+		else if(*e1 < *e2)
 			return false;
 	}
 	return true;
@@ -456,7 +472,7 @@ class Integer {
 		if(lhs.negative != rhs.negative)
 			return false;
 		
-		if(lhs.container.size() != rhs.container.size())
+		if(lhs.digits != rhs.digits)
 			return false;
 
 		auto lb = lhs.container.begin();
@@ -494,6 +510,12 @@ class Integer {
 	*/
 	friend bool operator < (const Integer& lhs, const Integer& rhs) 
 	{
+		if(lhs.negative && !rhs.negative)
+			return true;
+		
+		if(!lhs.negative && rhs.negative)
+			return false;
+
 		return !greater_than_equal(lhs.container.begin(), lhs.container.begin() + lhs.digits, rhs.container.begin(), rhs.container.begin() + rhs.digits);
 	}
 
@@ -633,7 +655,7 @@ class Integer {
 		if(rhs.negative)
 			lhs << "-";
 
-		for(auto rb = rhs.container.begin() + rhs.digits; rb != rhs.container.begin(); --rb)
+		for(auto rb = rhs.container.begin() + rhs.digits - 1; rb != rhs.container.begin(); --rb)
 			lhs << *rb;
 		lhs << *rhs.container.begin();
 		return lhs;
@@ -870,7 +892,7 @@ public:
 			if(-(*this) < rhs)
 			{
 				negative = false;
-				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, , container.begin()));
+				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
 			}
 			else if(-(*this) == rhs)
 			{
@@ -883,18 +905,18 @@ public:
 		}
 		else if(!negative && rhs.negative)
 		{
-			if(this < abs(rhs))
+			if(*this < -rhs)
 			{
-				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+				negative = true;
+				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
 			}
-			else if(this == rhs)
+			else if(*this == -rhs)
 			{
 				set_single(0);
 			}
 			else
 			{
-				negative = false;
-				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, , container.begin()));
+				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 		}
 		else // negative && rhs.negative
@@ -964,20 +986,21 @@ public:
 	*/
 	Integer& operator *= (const Integer& rhs) 
 	{
+		Integer c = *this;
 		resize(digits + rhs.digits);
 		if(negative && rhs.negative)
 		{
 			negative = false;
-			set_digits(multiplies_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+			set_digits(multiplies_digits(c.container.begin(), c.container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		else if(!negative && rhs.negative)
 		{
 			negative = true;
-			set_digits(multiplies_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+			set_digits(multiplies_digits(c.container.begin(), c.container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		else // !negative && !!rhs.negative + negative && !rhs.negative
 		{
-			set_digits(multiplies_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+			set_digits(multiplies_digits(c.container.begin(), c.container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		assert(valid());
 		return *this;
@@ -993,8 +1016,13 @@ public:
 	*/
 	Integer& operator /= (const Integer& rhs) 
 	{
+		Integer ct = *this;
+		Integer cr = rhs;
+		ct.abs();
+		cr.abs();
+
 		resize(digits + rhs.digits);
-		if(abs(rhs) < abs(*this))
+		if(cr < ct)
 		{
 			if(negative && rhs.negative)
 			{
@@ -1011,7 +1039,7 @@ public:
 				set_digits(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 		}
-		else if(abs(rhs) == abs(*this))
+		else if(cr == ct)
 		{
 			set_single(1);
 		}
@@ -1033,8 +1061,10 @@ public:
 	*/
 	Integer& operator %= (const Integer& rhs) 
 	{
+		static Integer zero(0);
+
 		// check rhs > 0
-		if(rhs <= 0)
+		if(rhs <= zero)
 			throw std::invalid_argument("Divisor cannot be less than or equal to zero");
 
 		Integer copy(*this);
@@ -1055,7 +1085,8 @@ public:
 	Integer& operator <<= (int n) 
 	{
 		resize(digits + n);
-		shift_left_digits(container.begin(), container.begin() + digits, n, container.begin());
+		inverse_shift_left_digits(container.begin(), container.begin() + digits, n, container.begin());
+		digits += n;
 		assert(valid());
 		return *this;
 	}
@@ -1071,6 +1102,7 @@ public:
 	{
 		resize(digits + n);
 		shift_right_digits(container.begin(), container.begin() + digits, n, container.begin());
+		digits -= n;
 		assert(valid());
 		return *this;
 	}
@@ -1104,14 +1136,17 @@ public:
 	{
 		static Integer zero(0);
 		// check base and exponent
-		if(e < zero)
+		if(e < 0)
 			throw std::invalid_argument("Exponent cannot be less than zero");
 
-		if(*this == zero && e == zero)
+		if(*this == zero && e == 0)
 			throw std::invalid_argument("Exponent and Base cannot be zero");
 
+		if(e == 0)
+			set_single(1);
+
 		Integer b(*this);
-		for(int i = 0; i < e; ++i)
+		for(int i = 1; i < e; ++i)
 		{
 			*this *= b;
 		}

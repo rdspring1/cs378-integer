@@ -158,7 +158,7 @@ struct TestInteger : CppUnit::TestFixture {
 	void test_shift_right_digits () 
 	{
 		const int a[] = {2, 3, 4};
-		const int b[] = {2};
+		const int b[] = {4};
 		int x[10];
 		const int* p = shift_right_digits(a, a + 3, 2, x);
 		CPPUNIT_ASSERT((p - x) == 1);
@@ -271,7 +271,7 @@ struct TestInteger : CppUnit::TestFixture {
 	{
 		Integer<int> a = Integer<int>(567);
 		Integer<int> b = Integer<int>(243);
-		Integer<int> c = Integer<int>(801);
+		Integer<int> c = Integer<int>(810);
 		Integer<int>& p = a += b;
 		CPPUNIT_ASSERT(a == p);
 		CPPUNIT_ASSERT(a == c);
@@ -433,7 +433,7 @@ struct TestInteger : CppUnit::TestFixture {
 	{
 		Integer<int> a = Integer<int>(12345);
 		Integer<int> b = Integer<int>(0);
-		Integer<int> c = Integer<int>(12345);
+		Integer<int> c = Integer<int>(0);
 		Integer<int>& p = a *= b;
 		CPPUNIT_ASSERT(a == p);
 		CPPUNIT_ASSERT(a == c);
