@@ -453,8 +453,25 @@ class Integer {
 	*/
 	friend bool operator == (const Integer& lhs, const Integer& rhs) 
 	{
-		// <your code>
-		return false;
+		if(lhs.negative != rhs.negative)
+			return false;
+		
+		if(lhs.container.size() != rhs.container.size())
+			return false;
+
+		auto lb = lhs.container.begin();
+		auto le = lhs.container.end();
+		auto rb = rhs.container.begin();
+		auto re = rhs.container.end();
+		
+		while(lb != le && rb != re)
+		{
+			if(*lb != *rb)
+				return false;
+			++lb;
+			++rb;
+		}
+		return true;
 	}
 
 	// -----------
@@ -660,7 +677,6 @@ private:
 	// ----
 	bool negative;
 	C container;
-	int digits;
 
 private:
 	// -----
@@ -669,7 +685,7 @@ private:
 
 	bool valid () const 
 	{
-		if(digits < 1)
+		if(container.size() < 1)
 			return false;
 		return true;
 	}
@@ -679,7 +695,6 @@ private:
 	*/
 	void setup_integer(int& value)
 	{
-		digits = 0;
 		if(value > 0)
 		{
 			negative = false;
@@ -688,7 +703,6 @@ private:
 		{
 			negative = false;
 			container.push_back(value);
-			++digits;
 		}
 		else
 		{
@@ -700,7 +714,6 @@ private:
 		{
 			container.push_back(value % 10);
 			value /= 10;
-			++digits;
 		}
 	}
 
@@ -753,8 +766,12 @@ public:
 	*/
 	Integer operator - () const 
 	{
-		// <your code>
-		return Integer(0);
+		static Integer zero(0);
+		Integer x(*this);
+		
+		if(x != zero)
+			x.negative = !this->negative;
+		return x;
 	}
 
 	// -----------
@@ -906,7 +923,7 @@ public:
 	*/
 	Integer& abs () 
 	{
-		// <your code>
+		this->negative = false;
 		return *this;
 	}
 
