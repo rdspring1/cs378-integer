@@ -6,7 +6,7 @@
 
 #ifndef Integer_h
 #define Integer_h
-
+#define SIZE 10
 // --------
 // includes
 // --------
@@ -408,13 +408,13 @@ OI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 		}
 		ex = plus_digits(x, ex, atom.begin(), atom.end(), x);
 		first = false;
-	} while(greater_than(difference.begin(), diffex, b2, e2));
+	} while(greater_than_equal(difference.begin(), diffex, b2, e2));
 
 	return ex;
 }
 
 template <typename II1, typename II2>
-bool greater_than (II1 b1, II1 e1, II2 b2, II2 e2) 
+bool greater_than_equal (II1 b1, II1 e1, II2 b2, II2 e2) 
 {
 	int digits1 = e1 - b1;
 	int digits2 = e2 - b2;
@@ -463,7 +463,6 @@ class Integer {
 		auto le = lhs.container.end();
 		auto rb = rhs.container.begin();
 		auto re = rhs.container.end();
-		
 		while(lb != le && rb != re)
 		{
 			if(*lb != *rb)
@@ -495,8 +494,7 @@ class Integer {
 	*/
 	friend bool operator < (const Integer& lhs, const Integer& rhs) 
 	{
-		// <your code>
-		return false;
+		return !greater_than_equal(lhs.container.begin(), lhs.container.end(), rhs.container.begin(), rhs.container.end());
 	}
 
 	// -----------
@@ -635,9 +633,9 @@ class Integer {
 		if(rhs.negative)
 			lhs << "-";
 
-		for(auto rb = rhs.container.rbegin(); rb != rhs.container.rend(); ++rb)
+		for(auto rb = rhs.container.begin() + rhs.digits; rb != rhs.container.begin(); --rb)
 			lhs << *rb;
-
+		lhs << *rhs.container.begin();
 		return lhs;
 	}
 
@@ -675,6 +673,7 @@ private:
 	// ----
 	// data
 	// ----
+	int digits;
 	bool negative;
 	C container;
 
@@ -685,8 +684,12 @@ private:
 
 	bool valid () const 
 	{
-		if(container.size() < 1)
+		if(digits < 1)
 			return false;
+
+		if(digits == 1 && container[0] == 0 && negative)
+			return false;
+
 		return true;
 	}
 
@@ -695,26 +698,51 @@ private:
 	*/
 	void setup_integer(int& value)
 	{
+		digits = 0;
 		if(value > 0)
 		{
 			negative = false;
 		}
-		else if(value == 0)
-		{
-			negative = false;
-			container.push_back(value);
-		}
-		else
+		else if(value < 0)
 		{
 			negative = true;
 			value *= -1;
+		}
+		else
+		{
+			set_single(0);
 		}
 
 		while(value != 0)
 		{
 			container.push_back(value % 10);
 			value /= 10;
+			++digits;
 		}
+	}
+
+	/**
+	* <your documentation>
+	*/
+	void set_single(int&& value)
+	{
+		this->negative = false;
+		container.clear();
+		container.push_back(value);
+		digits = 1;
+	}
+
+	void set_digits(typename C::iterator e)
+	{
+		// Set digits
+		digits = e - this->container.begin();
+	}
+
+	void resize(int size)
+	{	
+		// Resize the container
+		if(container.size() < 2 * size)
+			container.resize(2 * size);
 	}
 
 public:
@@ -750,6 +778,7 @@ public:
 			throw std::invalid_argument("The string Value must represent a number.");
 		else
 			setup_integer(ival);
+		assert(valid());
 	}
 
 	// Default copy, destructor, and copy asnegativement.
@@ -766,11 +795,10 @@ public:
 	*/
 	Integer operator - () const 
 	{
-		static Integer zero(0);
 		Integer x(*this);
-		
-		if(x != zero)
+		if(x != 0)
 			x.negative = !this->negative;
+		assert(valid());
 		return x;
 	}
 
@@ -829,7 +857,48 @@ public:
 	*/
 	Integer& operator += (const Integer& rhs) 
 	{
-		// <your code>
+		this->resize(this->digits + rhs->digits);
+		if(!this->negative && !rhs.negative)
+		{
+			plus_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+		}
+		else if(this->negative && !rhs.negative)
+		{
+			if(abs(*this) < rhs)
+			{
+				this->negative = false;
+				minus_digits(rhs.container.begin(), rhs.container.end(), *this->container.begin(), *this->container.end(), , *this->container.begin());
+			}
+			else if(abs(*this) == rhs)
+			{
+				set_single(0);
+			}
+			else
+			{
+				minus_digits(*this->container.begin(), *this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+			}
+		}
+		else if(!this->negative && rhs.negative)
+		{
+			if(abs(*this) < rhs)
+			{
+				minus_digits(*this->container.begin(), *this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+			}
+			else if(abs(*this) == rhs)
+			{
+				set_single(0);
+			}
+			else
+			{
+				this->negative = false;
+				minus_digits(rhs.container.begin(), rhs.container.end(), *this->container.begin(), *this->container.end(), , *this->container.begin());
+			}
+		}
+		else // this->negative && rhs.negative
+		{
+			plus_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+		}
+		assert(valid());
 		return *this;
 	}
 
@@ -842,7 +911,44 @@ public:
 	*/
 	Integer& operator -= (const Integer& rhs) 
 	{
-		// <your code>
+		this->resize(this->digits + rhs->digits);
+		if(!this->negative && !rhs.negative)
+		{
+			if(abs(*this) < rhs)
+			{
+				this->negative = true;
+				minus_digits(rhs.container.begin(), rhs.container.end(), *this->container.begin(), *this->container.end(), *this->container.begin());
+			}
+			else if(abs(*this) == rhs)
+			{
+				set_single(0);
+			}
+			else
+			{
+				minus_digits(*this->container.begin(), *this->container.end(), rhs.container.begin(), rhs.container.end() , *this->container.begin());
+			}
+		}
+		else if((this->negative && !rhs.negative) || (!this->negative && rhs.negative))
+		{
+			plus_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), *this->container.begin());
+		}
+		else // this->negative && rhs.negative
+		{
+			if(abs(*this) < rhs)
+			{
+				this->negative = false;
+				minus_digits(rhs.container.begin(), rhs.container.end(), *this->container.begin(), *this->container.end(), *this->container.begin());
+			}
+			else if(abs(*this) == rhs)
+			{
+				set_single(0);
+			}
+			else
+			{
+				minus_digits(*this->container.begin(), *this->container.end(), rhs.container.begin(), rhs.container.end() , *this->container.begin());
+			}
+		}
+		assert(valid());
 		return *this;
 	}
 
@@ -855,7 +961,25 @@ public:
 	*/
 	Integer& operator *= (const Integer& rhs) 
 	{
-		// <your code>
+		this->resize(this->digits + rhs->digits);
+		if(this->negative && rhs.negative)
+		{
+			this->negative = false;
+			multiplies_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+		}
+		else if(!this->negative && rhs.negative)
+		{
+			this->negative = true;
+			multiplies_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+		}
+		else // !this->negative && !!rhs.negative + this->negative && !rhs.negative
+		{
+			auto e = multiplies_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+			int digits = e - this.container.begin();
+			if(digits == 1 && this.container[0] == 0)
+				this.container.resize(1);
+		}
+		assert(valid());
 		return *this;
 	}
 
@@ -869,7 +993,33 @@ public:
 	*/
 	Integer& operator /= (const Integer& rhs) 
 	{
-		// <your code>
+		this->resize(this->digits + rhs->digits);
+		if(abs(rhs) < abs(*this))
+		{
+			if(this->negative && rhs.negative)
+			{
+				this->negative = false;
+				divides_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+			}
+			else if(!this->negative && rhs.negative)
+			{
+				this->negative = true;
+				divides_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+			}
+			else // this->negative && rhs.negative
+			{
+				divides_digits(this->container.begin(), this->container.end(), rhs.container.begin(), rhs.container.end(), this->container.begin());
+			}
+		}
+		else if(abs(rhs) == abs(*this))
+		{
+			set_single(1);
+		}
+		else
+		{
+			set_single(0);
+		}
+		assert(valid());
 		return *this;
 	}
 
@@ -883,7 +1033,15 @@ public:
 	*/
 	Integer& operator %= (const Integer& rhs) 
 	{
-		// <your code>
+		// check rhs > 0
+		if(rhs <= 0)
+			throw std::invalid_argument("Divisor cannot be less than or equal to zero");
+
+		Integer copy(*this);
+		copy /= rhs;
+		copy *= rhs;
+		*this -= copy;
+		assert(valid());
 		return *this;
 	}
 
@@ -896,7 +1054,8 @@ public:
 	*/
 	Integer& operator <<= (int n) 
 	{
-		// <your code>
+		shift_left_digits(this->container.begin(), this->container.end(), n, this->container.begin());
+		assert(valid());
 		return *this;
 	}
 
@@ -909,7 +1068,8 @@ public:
 	*/
 	Integer& operator >>= (int n) 
 	{
-		// <your code>
+		shift_right_digits(this->container.begin(), this->container.end(), n, this->container.begin());
+		assert(valid());
 		return *this;
 	}
 
@@ -924,6 +1084,7 @@ public:
 	Integer& abs () 
 	{
 		this->negative = false;
+		assert(valid());
 		return *this;
 	}
 
@@ -939,7 +1100,19 @@ public:
 	*/
 	Integer& pow (int e) 
 	{
-		// <your code>
+		// check base and exponent
+		if(e < 0)
+			throw std::invalid_argument("Exponent cannot be less than zero");
+
+		if(*this == 0 && e == 0)
+			throw std::invalid_argument("Exponent and Base cannot be zero");
+
+		Integer b(*this);
+		for(int i = 0; i < e; ++i)
+		{
+			*this *= b;
+		}
+		assert(valid());
 		return *this;
 	}
 };
