@@ -456,11 +456,11 @@ struct TestInteger : CppUnit::TestFixture {
 
 	void test_divides_digits_one () 
 	{
-		const int a[] = {1};
-		const int b[] = {9, 4, 8, 7};
+		const int a[] = {9, 4, 8, 7};
+		const int b[] = {1};
 		const int c[] = {9, 4, 8, 7};
 		int x[10];
-		const int* p = divides_digits(a, a + 1, b, b + 4, x);
+		const int* p = divides_digits(a, a + 4, b, b + 1, x);
 		CPPUNIT_ASSERT(p - x == 4);
 		CPPUNIT_ASSERT(std::equal(const_cast<const int*>(x), p, c));
 	}
@@ -533,7 +533,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Integer()") == 0);
+			CPPUNIT_ASSERT(strcmp(e.what(), "The string Value must represent a number.") == 0);
 		}
 	}
 

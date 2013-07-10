@@ -615,8 +615,13 @@ class Integer {
 	*/
 	friend std::ostream& operator << (std::ostream& lhs, const Integer& rhs) 
 	{
-		// <your code>
-		return lhs << "0";
+		if(rhs.negative)
+			lhs << "-";
+
+		for(auto rb = rhs.container.rbegin(); rb != rhs.container.rend(); ++rb)
+			lhs << *rb;
+
+		return lhs;
 	}
 
 	// ---
@@ -653,8 +658,8 @@ private:
 	// ----
 	// data
 	// ----
-	bool sign;
-	typename C container;
+	bool negative;
+	C container;
 	int digits;
 
 private:
@@ -666,15 +671,8 @@ private:
 	{
 		if(digits < 1)
 			return false;
-
-
 		return true;
 	}
-
-public:
-	// ------------
-	// constructors
-	// ------------
 
 	/**
 	* <your documentation>
@@ -684,16 +682,18 @@ public:
 		digits = 0;
 		if(value > 0)
 		{
-			sign = false;
+			negative = false;
 		}
 		else if(value == 0)
 		{
-			sign = false;
+			negative = false;
 			container.push_back(value);
+			++digits;
 		}
 		else
 		{
-			sign = true;
+			negative = true;
+			value *= -1;
 		}
 
 		while(value != 0)
@@ -703,6 +703,11 @@ public:
 			++digits;
 		}
 	}
+
+public:
+	// ------------
+	// constructors
+	// ------------
 
 	/**
 	* <your documentation>
@@ -722,19 +727,19 @@ public:
 		static std::string zero = "0";
 		if(value == zero)
 		{
-			sign = false;
+			negative = false;
 			container.push_back(0);
 			return;
 		}
 
 		int ival = strtol(value.c_str(), nullptr, 10);
 		if (ival == 0)
-			throw std::invalid_argument("Integer::Integer()");
+			throw std::invalid_argument("The string Value must represent a number.");
 		else
 			setup_integer(ival);
 	}
 
-	// Default copy, destructor, and copy assignment.
+	// Default copy, destructor, and copy asnegativement.
 	// Integer (const Integer&);
 	// ~Integer ();
 	// Integer& operator = (const Integer&);
