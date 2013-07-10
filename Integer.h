@@ -7,6 +7,7 @@
 #ifndef Integer_h
 #define Integer_h
 #define SIZE 50000
+
 // --------
 // includes
 // --------
@@ -36,7 +37,7 @@ template <typename II, typename OI>
 OI shift_left_digits (II b, II e, int n, OI x) 
 {
 	if(n < 0)
-		throw std::invalid_argument("The shift value cannot be negative number");
+		throw std::invalid_argument("The shift value cannot be a negative number.");
 
 	// Transfer values to x
 	while(b != e)
@@ -73,7 +74,7 @@ OI shift_right_digits (II b, II e, int n, OI x)
 {
 	if(n < 0)
 	{
-		throw std::invalid_argument("The shift value cannot be negative number");
+		throw std::invalid_argument("The shift value cannot be a negative number.");
 	}
 	else if(n == 0)
 	{
@@ -116,7 +117,7 @@ template <typename II, typename OI>
 OI inverse_shift_left_digits (II b, II e, int n, OI x) 
 {
 	if(n < 0)
-		throw std::invalid_argument("The shift value cannot be negative number");
+		throw std::invalid_argument("The shift value cannot be a negative number.");
 
 	int numelem = e - b;
 	int elem = numelem - 1;
@@ -652,8 +653,9 @@ class Integer {
 	*/
 	friend std::ostream& operator << (std::ostream& lhs, const Integer& rhs) 
 	{
+		static std::string negative_str = "-";
 		if(rhs.negative)
-			lhs << "-";
+			lhs << negative_str;
 
 		for(auto rb = rhs.container.begin() + rhs.digits - 1; rb != rhs.container.begin(); --rb)
 			lhs << *rb;
@@ -706,11 +708,10 @@ private:
 
 	bool valid () const 
 	{
-		static Integer zero(0);
 		if(digits < 1)
 			return false;
 
-		if(*this == zero && negative)
+		if(digits == 1 && container[0] == 0 && negative)
 			return false;
 
 		return true;
@@ -736,14 +737,13 @@ private:
 			set_single(0);
 		}
 
-		auto i = container.begin();
 		while(value != 0)
 		{
-			*i = value % 10;
+			container.push_back(value % 10);
 			value /= 10;
 			++digits;
-			++i;
 		}
+		container.resize(SIZE);
 	}
 
 	/**
@@ -778,7 +778,7 @@ public:
 	/**
 	* <your documentation>
 	*/
-	Integer (int value) : container(SIZE)
+	Integer (int value)
 	{
 		setup_integer(value);
 		assert(valid());
@@ -788,7 +788,7 @@ public:
 	* <your documentation>
 	* @throws invalid_argument if value is not a valid representation of an Integer
 	*/
-	explicit Integer (const std::string& value) : container(SIZE)
+	explicit Integer (const std::string& value)
 	{
 		static std::string zero = "0";
 		if(value == zero)
@@ -900,6 +900,7 @@ public:
 			}
 			else
 			{
+				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 		}
@@ -1061,10 +1062,8 @@ public:
 	*/
 	Integer& operator %= (const Integer& rhs) 
 	{
-		static Integer zero(0);
-
 		// check rhs > 0
-		if(rhs <= zero)
+		if(rhs <= 0)
 			throw std::invalid_argument("Divisor cannot be less than or equal to zero");
 
 		Integer copy(*this);
@@ -1134,12 +1133,11 @@ public:
 	*/
 	Integer& pow (int e) 
 	{
-		static Integer zero(0);
 		// check base and exponent
 		if(e < 0)
 			throw std::invalid_argument("Exponent cannot be less than zero");
 
-		if(*this == zero && e == 0)
+		if(*this == 0 && e == 0)
 			throw std::invalid_argument("Exponent and Base cannot be zero");
 
 		if(e == 0)

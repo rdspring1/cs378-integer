@@ -73,7 +73,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined") == 0);
+			CPPUNIT_ASSERT(strcmp(e.what(), "The shift value cannot be a negative number.") == 0);
 		}
 	}
 
@@ -111,7 +111,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Inverse Shift Left by a negative number is undefined") == 0);
+			CPPUNIT_ASSERT(strcmp(e.what(), "The shift value cannot be a negative number.") == 0);
 		}
 	}
 
@@ -147,7 +147,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Left by a negative number is undefined") == 0);
+			CPPUNIT_ASSERT(strcmp(e.what(), "The shift value cannot be a negative number.") == 0);
 		}
 	}
 
@@ -186,7 +186,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Right by a negative number is undefined") == 0);
+			CPPUNIT_ASSERT(strcmp(e.what(), "The shift value cannot be a negative number.") == 0);
 		}
 	}
 
@@ -222,7 +222,7 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 		catch (std::invalid_argument& e) 
 		{
-			CPPUNIT_ASSERT(strcmp(e.what(), "Shift Right by a negative number is undefined") == 0);
+			CPPUNIT_ASSERT(strcmp(e.what(), "The shift value cannot be a negative number.") == 0);
 		}
 	}
 
@@ -991,24 +991,6 @@ struct TestInteger : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_negation);
 	CPPUNIT_TEST(test_negation_negative);
 	CPPUNIT_TEST(test_negation_zero);
-	CPPUNIT_TEST(test_output);
-	CPPUNIT_TEST(test_output_negative);
-	CPPUNIT_TEST(test_output_large);
-	CPPUNIT_TEST(test_pow_method);
-	CPPUNIT_TEST(test_pow_function);
-	CPPUNIT_TEST(test_pow_e_b_zero);
-	CPPUNIT_TEST(test_pow_negative);
-	CPPUNIT_TEST(test_pow_zero);
-	CPPUNIT_TEST(test_pow_one);
-	CPPUNIT_TEST(test_less_than);
-	CPPUNIT_TEST(test_less_than_zero);
-	CPPUNIT_TEST(test_less_than_negative);
-	CPPUNIT_TEST(test_mod_equal);
-	CPPUNIT_TEST(test_mod_zero);
-	CPPUNIT_TEST(test_mod_negative);
-	//CPPUNIT_TEST(test_valid);
-	//CPPUNIT_TEST(test_valid_2);
-	//CPPUNIT_TEST(test_valid_3);
 	CPPUNIT_TEST_SUITE_END();};
 
 // ----
