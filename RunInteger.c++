@@ -506,21 +506,21 @@ int main () {
         cout << "negative(0) = " << -n << endl;
     }
     std::cout << std::endl; 
-    //cout << "RunInteger.c++" << endl << endl;
+    cout << "RunInteger.c++" << endl << endl;
     
     // less than 300 ms without valgrind
     // less than  15  s with    valgrind
-    //cout << "*** 20th Mersenne prime: 1,332 digits ***" << endl << endl;
+    cout << "*** 20th Mersenne prime: 1,332 digits ***" << endl << endl;
 
-    //{
-    //const Integer<int> n = Integer<int>(2).pow(4423) - 1;
-    //cout << "2^4423 - 1 = " << n << endl << endl;
-    //}
+    {
+    	const Integer<int> n = Integer<int>(2).pow(4423) - 1;
+    	cout << "2^4423 - 1 = " << n << endl << endl;
+    }
 
-    //{
-    //const Integer< int, std::deque<int> > n = Integer< int, std::deque<int> >(2).pow(4423) - 1;
-    //cout << "2^4423 - 1 = " << n << endl << endl;
-    //}
+    {
+    const Integer< int, std::deque<int> > n = Integer< int, std::deque<int> >(2).pow(4423) - 1;
+    cout << "2^4423 - 1 = " << n << endl << endl;
+    }
 
     // --------------------------
     // extra credit (5 bonus pts)
@@ -528,12 +528,12 @@ int main () {
 
     // less than 4 min without valgrind
     // don't run with valgrind
-    //cout << "*** 30th Mersenne prime: 39,751 digits ***" << endl << endl;
+    cout << "*** 30th Mersenne prime: 39,751 digits ***" << endl << endl;
 
-    //{
-    //const Integer<int> n = Integer<int>(2).pow(132049) - 1;
-    //cout << "2^132049 - 1 = " << n << endl << endl;
-    //}
+    {
+    	const Integer<int> n = Integer<int>(2).pow(132049) - 1;
+    	cout << "2^132049 - 1 = " << n << endl << endl;
+    }
 
     //cout << "Done." << endl;
 

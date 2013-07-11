@@ -272,9 +272,9 @@ struct TestInteger : CppUnit::TestFixture {
 
 	void test_plus_equal_operator ()
 	{
-		Integer<int> a = Integer<int>(567);
-		Integer<int> b = Integer<int>(243);
-		Integer<int> c = Integer<int>(810);
+		Integer<int> a = Integer<int>(-10);
+		Integer<int> b = Integer<int>(5);
+		Integer<int> c = Integer<int>(-5);
 		Integer<int>& p = a += b;
 		CPPUNIT_ASSERT(a == p);
 		CPPUNIT_ASSERT(a == c);

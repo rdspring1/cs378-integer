@@ -989,7 +989,6 @@ class Integer {
 			else
 			{
 				set_digit_count(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
-				set_digit_count(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 		}
 		else if(!negative && rhs.negative)
@@ -1178,6 +1177,12 @@ class Integer {
 	 */
 	Integer& operator <<= (int n) 
 	{
+		if(n < 0)
+			throw std::invalid_argument("The shift value cannot be a negative number.");
+		
+		if(digits == 1 && container[0] == 0)
+			return *this;
+
 		resize(digits + n);
 		inverse_shift_left_digits(container.begin(), container.begin() + digits, n, container.begin());
 		digits += n;
@@ -1197,9 +1202,20 @@ class Integer {
 	 */
 	Integer& operator >>= (int n) 
 	{
+		if(n < 0)
+			throw std::invalid_argument("The shift value cannot be a negative number.");
+
+		if(digits == 1 && container[0] == 0)
+			return *this;
+
 		resize(digits + n);
 		shift_right_digits(container.begin(), container.begin() + digits, n, container.begin());
 		digits -= n;
+
+		if(digits == 0)
+			set_single_digit(0);
+			
+
 		assert(valid());
 		return *this;
 	}
