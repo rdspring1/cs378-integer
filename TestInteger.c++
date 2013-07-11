@@ -16,11 +16,14 @@
    % valgrind TestInteger > TestInteger.out
  */
 
+#define private public
+#define protected public
+
 // --------
 // includes
 // --------
 
-#include <iostream>
+#include <iostream>  // cout
 #include <algorithm> // equal
 #include <cstring>   // strcmp
 #include <sstream>   // ostringstream
@@ -935,6 +938,214 @@ struct TestInteger : CppUnit::TestFixture {
 		}
 	}
 
+	void test_greater_than_equal_greater ()
+	{
+		const int a[] = {0, 0, 1};
+		const int b[] = {0, 1};
+		CPPUNIT_ASSERT(greater_than_equal(a, a + 3, b, b + 2));
+	}
+
+	void test_greater_than_equal_equal ()
+	{
+		const int a[] = {0, 1};
+		const int b[] = {0, 1};
+		CPPUNIT_ASSERT(greater_than_equal(a, a + 2, b, b + 2));
+	}
+
+	void test_greater_than_equal_less ()
+	{
+		const int a[] = {1};
+		const int b[] = {0, 1};
+		CPPUNIT_ASSERT(!greater_than_equal(a, a + 1, b, b + 2));
+	}
+
+	void test_valid ()
+	{
+		Integer<int> x(12345);
+		CPPUNIT_ASSERT(x.valid());
+	}
+
+	void test_valid_zero ()
+	{
+		Integer<int> x(0);
+		CPPUNIT_ASSERT(x.valid());
+	}
+
+	void test_valid_division_zero ()
+	{
+		Integer<int> numerator(5);
+		Integer<int> denominator(10);
+		Integer<int> result(0);
+		numerator /= denominator;
+		CPPUNIT_ASSERT(numerator == result);
+		CPPUNIT_ASSERT(numerator.valid());
+	}
+
+	void test_setup_integer ()
+	{
+		Integer<int> x(12345);
+		CPPUNIT_ASSERT(!x.negative);
+		CPPUNIT_ASSERT(x.digits == 5);
+		CPPUNIT_ASSERT(x.container[0] == 5);
+		CPPUNIT_ASSERT(x.container[1] == 4);
+		CPPUNIT_ASSERT(x.container[2] == 3);
+		CPPUNIT_ASSERT(x.container[3] == 2);
+		CPPUNIT_ASSERT(x.container[4] == 1);
+	}
+
+	void test_setup_integer_zero ()
+	{
+		Integer<int> x(0);
+		CPPUNIT_ASSERT(!x.negative);
+		CPPUNIT_ASSERT(x.digits == 1);
+		CPPUNIT_ASSERT(x.container[0] == 0);
+	}
+
+	void test_setup_integer_negative ()
+	{
+		Integer<int> x(-12345);
+		CPPUNIT_ASSERT(x.negative);
+		CPPUNIT_ASSERT(x.digits == 5);
+		CPPUNIT_ASSERT(x.container[0] == 5);
+		CPPUNIT_ASSERT(x.container[1] == 4);
+		CPPUNIT_ASSERT(x.container[2] == 3);
+		CPPUNIT_ASSERT(x.container[3] == 2);
+		CPPUNIT_ASSERT(x.container[4] == 1);
+	}
+
+	void test_setup_integer_negative_str ()
+	{
+		Integer<int> x("-12345");
+		CPPUNIT_ASSERT(x.negative);
+		CPPUNIT_ASSERT(x.digits == 5);
+		CPPUNIT_ASSERT(x.container[0] == 5);
+		CPPUNIT_ASSERT(x.container[1] == 4);
+		CPPUNIT_ASSERT(x.container[2] == 3);
+		CPPUNIT_ASSERT(x.container[3] == 2);
+		CPPUNIT_ASSERT(x.container[4] == 1);
+	}
+
+	void test_set_single_digit ()
+	{
+		Integer<int> x(12345);
+		CPPUNIT_ASSERT(!x.negative);
+		CPPUNIT_ASSERT(x.digits == 5);
+		CPPUNIT_ASSERT(x.container[0] == 5);
+		CPPUNIT_ASSERT(x.container[1] == 4);
+		CPPUNIT_ASSERT(x.container[2] == 3);
+		CPPUNIT_ASSERT(x.container[3] == 2);
+		CPPUNIT_ASSERT(x.container[4] == 1);
+		x.set_single_digit(5);
+		CPPUNIT_ASSERT(!x.negative);
+		CPPUNIT_ASSERT(x.digits == 1);
+		CPPUNIT_ASSERT(x.container[0] == 5);
+	}
+
+	void test_set_single_digit_zero ()
+	{
+		Integer<int> x(12345);
+		CPPUNIT_ASSERT(!x.negative);
+		CPPUNIT_ASSERT(x.digits == 5);
+		CPPUNIT_ASSERT(x.container[0] == 5);
+		CPPUNIT_ASSERT(x.container[1] == 4);
+		CPPUNIT_ASSERT(x.container[2] == 3);
+		CPPUNIT_ASSERT(x.container[3] == 2);
+		CPPUNIT_ASSERT(x.container[4] == 1);
+		x.set_single_digit(0);
+		CPPUNIT_ASSERT(!x.negative);
+		CPPUNIT_ASSERT(x.digits == 1);
+		CPPUNIT_ASSERT(x.container[0] == 0);
+	}
+
+	void test_set_single_digit_one ()
+	{
+		Integer<int> x(12345);
+		CPPUNIT_ASSERT(!x.negative);
+		CPPUNIT_ASSERT(x.digits == 5);
+		CPPUNIT_ASSERT(x.container[0] == 5);
+		CPPUNIT_ASSERT(x.container[1] == 4);
+		CPPUNIT_ASSERT(x.container[2] == 3);
+		CPPUNIT_ASSERT(x.container[3] == 2);
+		CPPUNIT_ASSERT(x.container[4] == 1);
+		x.set_single_digit(1);
+		CPPUNIT_ASSERT(!x.negative);
+		CPPUNIT_ASSERT(x.digits == 1);
+		CPPUNIT_ASSERT(x.container[0] == 1);
+	}
+
+	void test_set_digit_count_add ()
+	{
+		Integer<int> x(99);
+		Integer<int> y(1);
+		auto p = plus_digits(x.container.begin(), x.container.begin() + 2, y.container.begin(), y.container.begin() + 1, x.container.begin());
+		CPPUNIT_ASSERT(x.container[0] == 0);
+		CPPUNIT_ASSERT(x.container[1] == 0);
+		CPPUNIT_ASSERT(x.container[2] == 1);
+		x.set_digit_count(p);
+		CPPUNIT_ASSERT(x.digits == 3);
+	}
+
+	void test_set_digit_count_subtract ()
+	{
+		Integer<int> x(100);
+		Integer<int> y(1);
+		auto p = minus_digits(x.container.begin(), x.container.begin() + 2, y.container.begin(), y.container.begin() + 1, x.container.begin());
+		CPPUNIT_ASSERT(x.container[0] == 9);
+		CPPUNIT_ASSERT(x.container[1] == 9);
+		x.set_digit_count(p);
+		CPPUNIT_ASSERT(x.digits == 2);
+	}
+
+	void test_set_digit_count_multiply ()
+	{
+		Integer<int> x(100);
+		Integer<int> y(2);
+		Integer<int> z(0);
+		auto p = multiplies_digits(x.container.begin(), x.container.begin() + 3, y.container.begin(), y.container.begin() + 1, z.container.begin());
+		z.set_digit_count(p);
+		CPPUNIT_ASSERT(z.digits == 3);
+		CPPUNIT_ASSERT(z.container[0] == 0);
+		CPPUNIT_ASSERT(z.container[1] == 0);
+		CPPUNIT_ASSERT(z.container[2] == 2);
+	}
+
+	void test_set_digit_count_divide ()
+	{
+		Integer<int> x(100);
+		Integer<int> y(1);
+		Integer<int> z(0);
+		auto p = divides_digits(x.container.begin(), x.container.begin() + 2, y.container.begin(), y.container.begin() + 1, z.container.begin());
+		CPPUNIT_ASSERT(z.container[0] == 0);
+		CPPUNIT_ASSERT(z.container[1] == 0);
+		CPPUNIT_ASSERT(z.container[2] == 1);
+		z.set_digit_count(p);
+		CPPUNIT_ASSERT(z.digits == 3);
+	}
+
+	void test_resize ()
+	{
+		Integer<int> x(0);
+		CPPUNIT_ASSERT(x.container.size() == SIZE);
+		x.resize(2000);
+		CPPUNIT_ASSERT(x.container.size() == 4000);
+	}
+
+	void test_resize_less ()
+	{
+		Integer<int> x(0);
+		CPPUNIT_ASSERT(x.container.size() == SIZE);
+		x.resize(500);
+		CPPUNIT_ASSERT(x.container.size() == SIZE);
+	}
+
+	void test_resize_zero ()
+	{
+		Integer<int> x(0);
+		CPPUNIT_ASSERT(x.container.size() == SIZE);
+		x.resize(0);
+		CPPUNIT_ASSERT(x.container.size() == SIZE);
+	}
+
 	// -----
 	// suite
 	// -----
@@ -991,6 +1202,26 @@ struct TestInteger : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_negation);
 	CPPUNIT_TEST(test_negation_negative);
 	CPPUNIT_TEST(test_negation_zero);
+	CPPUNIT_TEST(test_greater_than_equal_greater);
+	CPPUNIT_TEST(test_greater_than_equal_equal);
+	CPPUNIT_TEST(test_greater_than_equal_less);
+	CPPUNIT_TEST(test_valid);
+	CPPUNIT_TEST(test_valid_zero);
+	CPPUNIT_TEST(test_valid_division_zero);
+	CPPUNIT_TEST(test_setup_integer);
+	CPPUNIT_TEST(test_setup_integer_zero);
+	CPPUNIT_TEST(test_setup_integer_negative);
+	CPPUNIT_TEST(test_setup_integer_negative_str);
+	CPPUNIT_TEST(test_set_single_digit);
+	CPPUNIT_TEST(test_set_single_digit_zero);
+	CPPUNIT_TEST(test_set_single_digit_one);
+	CPPUNIT_TEST(test_set_digit_count_add);
+	CPPUNIT_TEST(test_set_digit_count_subtract);
+	CPPUNIT_TEST(test_set_digit_count_multiply);
+	CPPUNIT_TEST(test_set_digit_count_divide);
+	CPPUNIT_TEST(test_resize);
+	CPPUNIT_TEST(test_resize_less);
+	CPPUNIT_TEST(test_resize_zero);
 	CPPUNIT_TEST_SUITE_END();};
 
 // ----

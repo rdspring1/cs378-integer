@@ -823,7 +823,7 @@ class Integer {
 	 * @param e - an iterator to the Most Significant Digit(MSD) in the Integer
 	 * Determine the number of digits in the Integer
 	 */
-	void set_digits(typename C::iterator e)
+	void set_digit_count(typename C::iterator e)
 	{
 		// Set digits
 		digits = e - container.begin();
@@ -970,14 +970,14 @@ class Integer {
 		resize(digits + rhs.digits);
 		if(!negative && !rhs.negative)
 		{
-			set_digits(plus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+			set_digit_count(plus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		else if(negative && !rhs.negative)
 		{
 			if(-(*this) < rhs)
 			{
 				negative = false;
-				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
+				set_digit_count(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
 			}
 			else if(-(*this) == rhs)
 			{
@@ -985,8 +985,8 @@ class Integer {
 			}
 			else
 			{
-				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
-				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+				set_digit_count(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+				set_digit_count(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 		}
 		else if(!negative && rhs.negative)
@@ -994,7 +994,7 @@ class Integer {
 			if(*this < -rhs)
 			{
 				negative = true;
-				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
+				set_digit_count(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
 			}
 			else if(*this == -rhs)
 			{
@@ -1002,12 +1002,12 @@ class Integer {
 			}
 			else
 			{
-				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+				set_digit_count(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 		}
 		else // negative && rhs.negative
 		{
-			set_digits(plus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+			set_digit_count(plus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		assert(valid());
 		return *this;
@@ -1030,7 +1030,7 @@ class Integer {
 			if(*this < rhs)
 			{
 				negative = true;
-				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
+				set_digit_count(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
 			}
 			else if(*this == rhs)
 			{
@@ -1038,19 +1038,19 @@ class Integer {
 			}
 			else
 			{
-				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits , container.begin()));
+				set_digit_count(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits , container.begin()));
 			}
 		}
 		else if((negative && !rhs.negative) || (!negative && rhs.negative))
 		{
-			set_digits(plus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+			set_digit_count(plus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		else // negative && rhs.negative
 		{
 			if(-(*this) < -rhs)
 			{
 				negative = false;
-				set_digits(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
+				set_digit_count(minus_digits(rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin(), container.begin() + digits, container.begin()));
 			}
 			else if(-(*this) == -rhs)
 			{
@@ -1058,7 +1058,7 @@ class Integer {
 			}
 			else
 			{
-				set_digits(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits , container.begin()));
+				set_digit_count(minus_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits , container.begin()));
 			}
 		}
 		assert(valid());
@@ -1081,16 +1081,16 @@ class Integer {
 		if(negative && rhs.negative)
 		{
 			negative = false;
-			set_digits(multiplies_digits(c.container.begin(), c.container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+			set_digit_count(multiplies_digits(c.container.begin(), c.container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		else if(!negative && rhs.negative)
 		{
 			negative = true;
-			set_digits(multiplies_digits(c.container.begin(), c.container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+			set_digit_count(multiplies_digits(c.container.begin(), c.container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		else // !negative && !!rhs.negative + negative && !rhs.negative
 		{
-			set_digits(multiplies_digits(c.container.begin(), c.container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+			set_digit_count(multiplies_digits(c.container.begin(), c.container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 		}
 		assert(valid());
 		return *this;
@@ -1119,16 +1119,16 @@ class Integer {
 			if(negative && rhs.negative)
 			{
 				negative = false;
-				set_digits(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+				set_digit_count(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 			else if(!negative && rhs.negative)
 			{
 				negative = true;
-				set_digits(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+				set_digit_count(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 			else // negative && rhs.negative
 			{
-				set_digits(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
+				set_digit_count(divides_digits(container.begin(), container.begin() + digits, rhs.container.begin(), rhs.container.begin() + rhs.digits, container.begin()));
 			}
 		}
 		else
