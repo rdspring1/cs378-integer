@@ -428,6 +428,17 @@ OI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 	return ex;
 }
 
+// --------------------
+// greater_than_equal
+// --------------------
+
+/**
+* @param b  an iterator to the beginning of the lhs input  sequence
+* @param e  an iterator to the end       of the lhs input  sequence
+* @param b2 an iterator to the beginning of the rhs input  sequence
+* @param e2 an iterator to the end       of the rhs input  sequence
+* @return  whether the lhs sequence is greater than or equal to the rhs sequence
+*/
 template <typename II1, typename II2>
 bool greater_than_equal (II1 b1, II1 e1, II2 b2, II2 e2) 
 {
@@ -466,7 +477,10 @@ class Integer {
 	// -----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return true if the lhs Integer is equal to the rhs Integer
+    * equal operator
 	*/
 	friend bool operator == (const Integer& lhs, const Integer& rhs) 
 	{
@@ -495,7 +509,10 @@ class Integer {
 	// -----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return true if the lhs Integer is not equal to the rhs Integer
+    * not equal operator
 	*/
 	friend bool operator != (const Integer& lhs, const Integer& rhs) 
 	{
@@ -507,7 +524,10 @@ class Integer {
 	// ----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return true if the lhs Integer is less than the rhs Integer
+    * less than operator
 	*/
 	friend bool operator < (const Integer& lhs, const Integer& rhs) 
 	{
@@ -525,7 +545,10 @@ class Integer {
 	// -----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return true if the lhs Integer is less than or equal to the rhs Integer
+    * less than or equal to operator
 	*/
 	friend bool operator <= (const Integer& lhs, const Integer& rhs) 
 	{
@@ -537,7 +560,10 @@ class Integer {
 	// ----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return true if the lhs Integer is greater than the rhs Integer
+    * greater than operator
 	*/
 	friend bool operator > (const Integer& lhs, const Integer& rhs) 
 	{
@@ -549,7 +575,10 @@ class Integer {
 	// -----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return true if the lhs Integer is greater than or equal to the rhs Integer
+    * greater than or equal to operator
 	*/
 	friend bool operator >= (const Integer& lhs, const Integer& rhs) 
 	{
@@ -561,7 +590,10 @@ class Integer {
 	// ----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return an Integer that is the sum of the lhs Integer and rhs Integer
+    * addition operator
 	*/
 	friend Integer operator + (Integer lhs, const Integer& rhs) 
 	{
@@ -573,7 +605,10 @@ class Integer {
 	// ----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return an Integer that is the difference of the lhs Integer and rhs Integer
+    * subtraction operator
 	*/
 	friend Integer operator - (Integer lhs, const Integer& rhs) 
 	{
@@ -585,7 +620,10 @@ class Integer {
 	// ----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return an Integer that is the product of the lhs Integer and rhs Integer
+    * multiplication operator
 	*/
 	friend Integer operator * (Integer lhs, const Integer& rhs) 
 	{
@@ -597,8 +635,11 @@ class Integer {
 	// ----------
 
 	/**
-	* <your documentation>
+    * @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return an Integer that is the quotient of the lhs Integer and rhs Integer
 	* @throws invalid_argument if (rhs == 0)
+    * division operator
 	*/
 	friend Integer operator / (Integer lhs, const Integer& rhs) 
 	{
@@ -610,8 +651,11 @@ class Integer {
 	// ----------
 
 	/**
-	* <your documentation>
+    * @param lhs - the left hand side Integer
+    * @param rhs - the right hand side Integer
+    * @return an Integer that is the modulo of the lhs Integer and rhs Integer
 	* @throws invalid_argument if (rhs <= 0)
+    * modulus operator
 	*/
 	friend Integer operator % (Integer lhs, const Integer& rhs) 
 	{
@@ -623,8 +667,11 @@ class Integer {
 	// -----------
 
 	/**
-	* <your documentation>
+	* @param lhs - the left hand side Integer
+    * @param n - the number of positions to shift the Integer
+    * @return an Integer that is shifted n positions to the left
 	* @throws invalid_argument if (rhs < 0)
+    * shift left operator
 	*/
 	friend Integer operator << (Integer lhs, int rhs) 
 	{
@@ -636,8 +683,11 @@ class Integer {
 	// -----------
 
 	/**
-	* <your documentation>
+    * @param lhs - the left hand side Integer
+    * @param n - the number of positions to shift the Integer
+    * @return an Integer that is shifted n positions to the right
 	* @throws invalid_argument if (rhs < 0)
+    * shift right operator
 	*/
 	friend Integer operator >> (Integer lhs, int rhs) 
 	{
@@ -649,7 +699,9 @@ class Integer {
 	// -----------
 
 	/**
-	* <your documentation>
+	* @param lhs - an output stream
+    * @param rhs - the right hand side Integer
+    * @return an output stream that contains the string representation of the Integer
 	*/
 	friend std::ostream& operator << (std::ostream& lhs, const Integer& rhs) 
 	{
@@ -668,6 +720,8 @@ class Integer {
 	// ---
 
 	/**
+    * @param x - an Integer - copy by value
+    * @return an Integer that is the absolute value of the Integer parameter
 	* absolute value
 	* does NOT modify the argument
 	* <your documentation>
@@ -682,9 +736,11 @@ class Integer {
 	// ---
 
 	/**
+    * @param x - an Integer that is the base number for the power function - copy by value
+    * @param e - the exponent of the power function
+    * @return an Integer that is the power of the numbers x and e
 	* power
 	* does NOT modify the argument
-	* <your documentation>
 	* @throws invalid_argument if (x == 0) && (e == 0)
 	* @throws invalid_argument if (e < 0)
 	*/
@@ -706,6 +762,9 @@ private:
 	// valid
 	// -----
 
+    /**
+	* <your documentation>
+	*/
 	bool valid () const 
 	{
 		if(digits < 1)
@@ -757,12 +816,18 @@ private:
 		digits = 1;
 	}
 
+    /**
+	* <your documentation>
+	*/
 	void set_digits(typename C::iterator e)
 	{
 		// Set digits
 		digits = e - container.begin();
 	}
 
+    /**
+	* <your documentation>
+	*/
 	void resize(typename C::size_type size)
 	{	
 		// Resize the container
