@@ -11,7 +11,7 @@ clean:
 
 diff: RunInteger RunInteger.out
 	./RunInteger > RunInteger.tmp
-	diff RunInteger.out RunInteger.tmp
+	diff -b RunInteger.out RunInteger.tmp
 	rm RunInteger.tmp
 
 doc: Integer.h
