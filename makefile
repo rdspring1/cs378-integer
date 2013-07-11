@@ -37,6 +37,12 @@ RunInteger: Integer.h RunInteger.c++
 RunInteger.out: RunInteger
 	valgrind ./RunInteger &> RunInteger.out
 
+ECInteger: Integer.h ECInteger.c++
+	g++ -pedantic -std=c++0x -Wall ECInteger.c++ -o ECInteger
+
+ECInteger.out: ECInteger
+	./ECInteger > ECInteger.out
+
 TestInteger: Integer.h TestInteger.c++
 	g++ -pedantic -std=c++0x -Wall TestInteger.c++ -o TestInteger -lcppunit -ldl
 
