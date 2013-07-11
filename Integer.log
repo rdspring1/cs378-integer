@@ -1,0 +1,203 @@
+commit 1ff54e16563d070ded170826d3acb1fa221592b1
+Author: rdspring <rdspring1@gmail.com>
+Date:   Thu Jul 11 06:10:42 2013 -0500
+
+    Turnin Submission
+
+commit f819013b6e4ca847642dcbf554320578363a70df
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Thu Jul 11 06:07:38 2013 -0500
+
+    RunInteger.out - Acceptance Test
+
+commit 7c335544038e526618c807ad81b86ddb07098ea4
+Author: rdspring <rdspring1@gmail.com>
+Date:   Thu Jul 11 06:04:02 2013 -0500
+
+    Fixed RunInteger.c++ for Acceptance Tests
+
+commit 62aeb24f846782ee726e048b5665a7a4604666d6
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Thu Jul 11 05:43:23 2013 -0500
+
+    Updated RunInteger.out
+
+commit c4add855aa7ea9c3076fbafdc7ca2c0df37711fc
+Author: rdspring <rdspring1@gmail.com>
+Date:   Thu Jul 11 05:34:21 2013 -0500
+
+    Add RunInteger.tmp
+
+commit bbc57c84946a1783a4e5563cd2985ed2fb6ba436
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Thu Jul 11 05:22:16 2013 -0500
+
+    Fixed Bugs using Acceptance Tests
+
+commit 058b3e6d75b66372b9b8cc494a8f8f50690c5e2e
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Thu Jul 11 05:06:19 2013 -0500
+
+    Added Acceptance Tests
+
+commit 3d39447a12ba1217bcf6ea6a5c243adb14cc9ad2
+Author: rdspring <rdspring1@gmail.com>
+Date:   Thu Jul 11 04:35:15 2013 -0500
+
+    Timed 20th and 30th Mersenne Prime Results
+
+commit f8a7c37b805066b498a9bedbf0540df6df4a36f0
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Thu Jul 11 04:28:56 2013 -0500
+
+    Updated Acceptance Tests and Timer for Extra Credit
+
+commit 100f1cb7355a708d2cb165858de6757dd3bfccba
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Thu Jul 11 03:38:11 2013 -0500
+
+    Updated make clean command
+
+commit 9d98de52c61461681cc92fc5720ffb5bff30b987
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Thu Jul 11 03:35:13 2013 -0500
+
+    Create Doxygen Documentation
+
+commit b4fd37d689dcc7e1991bb3f866b3e32fc4a79de2
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Thu Jul 11 03:20:21 2013 -0500
+
+    Add Seperate File and Command for 30th Mersenne Prime Extra Credit
+
+commit 1f71bd2a1b24b5a9ade9748f4797ddc551d1f17d
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Thu Jul 11 02:48:37 2013 -0500
+
+    Updated Unit Tests for Private Functions
+
+commit a1447ee243d296b00c6c5cf1f0b94999a2a9a352
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Wed Jul 10 22:01:34 2013 -0500
+
+    Completed Documentation
+
+commit 3497b5536bb10e2501200548c71e5e624188e05c
+Author: rdspring <rdspring1@gmail.com>
+Date:   Wed Jul 10 19:06:14 2013 -0500
+
+    Documentation
+
+commit a0a00bfedc5e4f9db5485c008b406094aadda5db
+Author: rdspring <rdspring1@gmail.com>
+Date:   Wed Jul 10 18:36:35 2013 -0500
+
+    Passed Vector and Deque 20th Prime in under 15 seconds
+
+commit f903b9ef16b241b2174b1d8414754d743ce10712
+Author: rdspring <rdspring1@gmail.com>
+Date:   Wed Jul 10 18:23:35 2013 -0500
+
+    Fix Integer to run on Linux
+
+commit ef65476c0e4d05ead94fb7a507e18ce0fcd4163d
+Author: rdspring <rdspring1@gmail.com>
+Date:   Wed Jul 10 17:13:15 2013 -0500
+
+    Passed Unit Tests; Slow Multiplication Performance
+
+commit b6ee3f4dc0d0c66ae8fa429322821c198f6d17c2
+Author: rdspring <rdspring1@gmail.com>
+Date:   Wed Jul 10 15:48:06 2013 -0500
+
+    Optimized Integer Performance
+
+commit 0ec999038c6bf8b34d3033ea0cedf93a1bdf6c1f
+Author: rdspring <rdspring1@gmail.com>
+Date:   Wed Jul 10 14:50:44 2013 -0500
+
+    Implemented +=, -=, /=, *=, %=, <<=, >>=, pow
+
+commit e33ab7d22339885f7b347c962c60e1a6d8550a52
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Wed Jul 10 00:11:38 2013 -0500
+
+    Implemented negative, equal, abs
+
+commit 5aaf36cfa44218770ac376e2ea0f9d7d3900d63f
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Tue Jul 9 23:50:31 2013 -0500
+
+    Implemented output << operator
+
+commit d9f7c9d6e168723d4d44984257ac5f27ea06f082
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Tue Jul 9 21:53:02 2013 -0500
+
+    Fixed Multiply Operator; Implemented Division; Implemented Integer Constructor
+
+commit cb409d803c1ad59e1f9f870fe21f1e72a7f83baa
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Tue Jul 9 07:18:43 2013 -0500
+
+    Implemented Multiplication Operation
+
+commit 6882b912a3465c747db94cb78a93a9567fdc1990
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Tue Jul 9 04:31:13 2013 -0500
+
+    Added Inverse Shift Left Function for multiply operation
+
+commit f7e266a30e619be34698008b3a2048b4e8f53fb9
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Tue Jul 9 02:25:28 2013 -0500
+
+    Implement plus_digit and minus_digit
+
+commit 239691b783fd99c4f57ea59b6a473052e09d676e
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Tue Jul 9 00:56:39 2013 -0500
+
+    Implement shift_left and shift_right; fix exception unit test
+
+commit 0744d7a675c20d58814857009693bb9c90e80c9d
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Tue Jul 9 00:22:18 2013 -0500
+
+    Fix makefile to run TestInteger and RunInteger
+
+commit 6157f65a94fba5f34db30464da0cc14491dc1f23
+Author: rdspring <rdspring1@gmail.com>
+Date:   Mon Jul 8 17:33:32 2013 -0500
+
+    Store Numbers in LSD instead of MSD - Changed Unit Tests
+
+commit 26976e6a0eaaa5cf2d70870a49905cf9985924c2
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Sun Jul 7 22:21:57 2013 -0500
+
+    Add Unit Test - less than, modulus
+
+commit 62cf0a0448189bfc05486505a7a4bc52cd55b93c
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Sun Jul 7 21:50:11 2013 -0500
+
+    Added Unit Tests - minus, multiply, divide, equals, output, constructor, negation, abs, pow
+
+commit a8456a780e9090f0af71eda4f894be135b9743b0
+Author: RyanDS <rdspring1@gmail.com>
+Date:   Sun Jul 7 19:43:37 2013 -0500
+
+    Added Unit Tests - <<, <<=, >>, >>=, +, +=
+
+commit 64ca4b06163dedb85a2c9ad85ee33416e95e8f79
+Author: rdspring <rdspring1@gmail.com>
+Date:   Mon Jul 1 16:35:57 2013 -0500
+
+    Initial Skeleton
+
+commit c4c4888dec9622ce4b8f8bbd86093a353b82cf5d
+Author: rdspring1 <rdspring1@gmail.com>
+Date:   Mon Jul 1 14:21:03 2013 -0700
+
+    Initial commit
