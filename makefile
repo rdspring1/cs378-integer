@@ -10,7 +10,7 @@ clean:
 	rm -f ECInteger
 
 diff: RunInteger RunInteger.out
-	RunInteger > RunInteger.tmp
+	./RunInteger > RunInteger.tmp
 	diff RunInteger.out RunInteger.tmp
 	rm RunInteger.tmp
 
