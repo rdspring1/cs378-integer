@@ -27,6 +27,7 @@
 /**
  * @param b an iterator to the beginning of an input  sequence (inclusive)
  * @param e an iterator to the end       of an input  sequence (exclusive)
+ * @param n - the number of positions to shift the sequence
  * @param x an iterator to the beginning of an output sequence (inclusive)
  * @return  an iterator to the end       of an output sequence (exclusive)
  * the sequences are of decimal digits
@@ -63,6 +64,7 @@ OI shift_left_digits (II b, II e, int n, OI x)
 /**
  * @param b an iterator to the beginning of an input  sequence (inclusive)
  * @param e an iterator to the end       of an input  sequence (exclusive)
+ * @param n - the number of positions to shift the sequence
  * @param x an iterator to the beginning of an output sequence (inclusive)
  * @return  an iterator to the end       of an output sequence (exclusive)
  * the sequences are of decimal digits
@@ -107,6 +109,7 @@ OI shift_right_digits (II b, II e, int n, OI x)
 /**
  * @param b an iterator to the beginning of an input  sequence (inclusive)
  * @param e an iterator to the end       of an input  sequence (exclusive)
+ * @param n - the number of positions to shift the sequence
  * @param x an iterator to the beginning of an output sequence (inclusive)
  * @return  an iterator to the end       of an output sequence (exclusive)
  * the sequences are of decimal digits
@@ -144,8 +147,8 @@ OI inverse_shift_left_digits (II b, II e, int n, OI x)
 // -----------
 
 /**
- * @param b  an iterator to the beginning of an input  sequence (inclusive)
- * @param e  an iterator to the end       of an input  sequence (exclusive)
+ * @param b1  an iterator to the beginning of an input  sequence (inclusive)
+ * @param e1  an iterator to the end       of an input  sequence (exclusive)
  * @param b2 an iterator to the beginning of an input  sequence (inclusive)
  * @param e2 an iterator to the end       of an input  sequence (exclusive)
  * @param x  an iterator to the beginning of an output sequence (inclusive)
@@ -228,8 +231,8 @@ OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 // ------------
 
 /**
- * @param b  an iterator to the beginning of an input  sequence (inclusive)
- * @param e  an iterator to the end       of an input  sequence (exclusive)
+ * @param b1 an iterator to the beginning of an input  sequence (inclusive)
+ * @param e1 an iterator to the end       of an input  sequence (exclusive)
  * @param b2 an iterator to the beginning of an input  sequence (inclusive)
  * @param e2 an iterator to the end       of an input  sequence (exclusive)
  * @param x  an iterator to the beginning of an output sequence (inclusive)
@@ -309,8 +312,8 @@ OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 // -----------------
 
 /**
- * @param b  an iterator to the beginning of an input  sequence (inclusive)
- * @param e  an iterator to the end       of an input  sequence (exclusive)
+ * @param b1  an iterator to the beginning of an input  sequence (inclusive)
+ * @param e1  an iterator to the end       of an input  sequence (exclusive)
  * @param b2 an iterator to the beginning of an input  sequence (inclusive)
  * @param e2 an iterator to the end       of an input  sequence (exclusive)
  * @param x  an iterator to the beginning of an output sequence (inclusive)
@@ -380,8 +383,8 @@ OI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 // --------------
 
 /**
- * @param b  an iterator to the beginning of an input  sequence (inclusive)
- * @param e  an iterator to the end       of an input  sequence (exclusive)
+ * @param b1 an iterator to the beginning of an input  sequence (inclusive)
+ * @param e1 an iterator to the end       of an input  sequence (exclusive)
  * @param b2 an iterator to the beginning of an input  sequence (inclusive)
  * @param e2 an iterator to the end       of an input  sequence (exclusive)
  * @param x  an iterator to the beginning of an output sequence (inclusive)
@@ -433,8 +436,8 @@ OI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 // --------------------
 
 /**
- * @param b  an iterator to the beginning of the lhs input  sequence
- * @param e  an iterator to the end       of the lhs input  sequence
+ * @param b1 an iterator to the beginning of the lhs input  sequence
+ * @param e1 an iterator to the end       of the lhs input  sequence
  * @param b2 an iterator to the beginning of the rhs input  sequence
  * @param e2 an iterator to the end       of the rhs input  sequence
  * @return  whether the lhs sequence is greater than or equal to the rhs sequence
@@ -668,7 +671,7 @@ class Integer {
 
 	/**
 	 * @param lhs - the left hand side Integer
-	 * @param n - the number of positions to shift the Integer
+	 * @param rhs - the number of positions to shift the Integer
 	 * @return an Integer that is shifted n positions to the left
 	 * @throws invalid_argument if (rhs < 0)
 	 * shift left operator
@@ -684,7 +687,7 @@ class Integer {
 
 	/**
 	 * @param lhs - the left hand side Integer
-	 * @param n - the number of positions to shift the Integer
+	 * @param rhs - the number of positions to shift the Integer
 	 * @return an Integer that is shifted n positions to the right
 	 * @throws invalid_argument if (rhs < 0)
 	 * shift right operator
@@ -846,7 +849,7 @@ class Integer {
 	// ------------
 
 	/**
-	 * @param - value - an int value which is used to initialize the Integer 
+	 * @param value - an int value which is used to initialize the Integer 
 	 * Construct an Integer using an int argument
 	 */
 	Integer (int value)
@@ -856,7 +859,7 @@ class Integer {
 	}
 
 	/**
-	 * @param - value - a std::string value which is used to initialize the Integer
+	 * @param value - a std::string value which is used to initialize the Integer
 	 * @throws invalid_argument if value is not a valid representation of an Integer
 	 * Construct an Integer using a std:string argument
 	 */
