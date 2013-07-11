@@ -36,22 +36,29 @@ To document the program:
 // ----
 
 int main () {
-    using namespace std;
-    cout << "RunInteger.c++" << endl << endl;
-
+    using namespace std;  
+    // Acceptance Tests
+    // Addition
+    {
+        const Integer<int> n = Integer<int>(10) - 10;
+        cout << "10 - 10 = " << n << endl;
+    }
+    
+    //cout << "RunInteger.c++" << endl << endl;
+    
     // less than 300 ms without valgrind
     // less than  15  s with    valgrind
-    cout << "*** 20th Mersenne prime: 1,332 digits ***" << endl << endl;
+    //cout << "*** 20th Mersenne prime: 1,332 digits ***" << endl << endl;
 
-    {
-    const Integer<int> n = Integer<int>(2).pow(4423) - 1;
-    cout << "2^4423 - 1 = " << n << endl << endl;
-    }
+    //{
+    //const Integer<int> n = Integer<int>(2).pow(4423) - 1;
+    //cout << "2^4423 - 1 = " << n << endl << endl;
+    //}
 
-    {
-    const Integer< int, std::deque<int> > n = Integer< int, std::deque<int> >(2).pow(4423) - 1;
-    cout << "2^4423 - 1 = " << n << endl << endl;
-    }
+    //{
+    //const Integer< int, std::deque<int> > n = Integer< int, std::deque<int> >(2).pow(4423) - 1;
+    //cout << "2^4423 - 1 = " << n << endl << endl;
+    //}
 
     // --------------------------
     // extra credit (5 bonus pts)
