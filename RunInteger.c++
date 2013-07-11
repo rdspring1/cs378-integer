@@ -535,6 +535,6 @@ int main () {
     	cout << "2^132049 - 1 = " << n << endl << endl;
     }
 
-    //cout << "Done." << endl;
+    cout << "Done." << endl;
 
     return 0;}
