@@ -619,219 +619,218 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00701"></a>00701         <span class="comment">// operator &lt;&lt;</span>
 <a name="l00702"></a>00702         <span class="comment">// -----------</span>
 <a name="l00703"></a>00703 
-<a name="l00709"></a><a class="code" href="classInteger.html#a76099b70bb34d31b3874482f89e24ccd">00709</a>         <span class="keyword">friend</span> std::ostream&amp; <a class="code" href="classInteger.html#aaf32bc4191034ed250a064aa6796ade5">operator &lt;&lt; </a>(std::ostream&amp; lhs, <span class="keyword">const</span> <a class="code" href="classInteger.html">Integer</a>&amp; rhs) 
-<a name="l00710"></a>00710         {
-<a name="l00711"></a>00711                 <span class="keyword">static</span> std::string negative_str = <span class="stringliteral">&quot;-&quot;</span>;
-<a name="l00712"></a>00712                 <span class="keywordflow">if</span>(rhs.<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>)
-<a name="l00713"></a>00713                         lhs &lt;&lt; negative_str;
-<a name="l00714"></a>00714 
-<a name="l00715"></a>00715                 <span class="keywordflow">for</span>(<span class="keyword">auto</span> rb = rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> - 1; rb != rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(); --rb)
-<a name="l00716"></a>00716                         lhs &lt;&lt; *rb;
-<a name="l00717"></a>00717                 lhs &lt;&lt; *rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin();
-<a name="l00718"></a>00718                 <span class="keywordflow">return</span> lhs;
-<a name="l00719"></a>00719         }
-<a name="l00720"></a>00720 
-<a name="l00721"></a>00721         <span class="comment">// ---</span>
-<a name="l00722"></a>00722         <span class="comment">// abs</span>
-<a name="l00723"></a>00723         <span class="comment">// ---</span>
-<a name="l00724"></a>00724 
-<a name="l00731"></a><a class="code" href="classInteger.html#ac872a9e1c5a2e8e1457baf75e439f8da">00731</a>         <span class="keyword">friend</span> <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#a28b38b99580e4787e353c6630c3cf063">abs</a> (<a class="code" href="classInteger.html">Integer</a> x) 
-<a name="l00732"></a>00732         {
-<a name="l00733"></a>00733                 <span class="keywordflow">return</span> x.<a class="code" href="classInteger.html#ac872a9e1c5a2e8e1457baf75e439f8da">abs</a>();
-<a name="l00734"></a>00734         }
-<a name="l00735"></a>00735 
-<a name="l00736"></a>00736         <span class="comment">// ---</span>
-<a name="l00737"></a>00737         <span class="comment">// pow</span>
-<a name="l00738"></a>00738         <span class="comment">// ---</span>
-<a name="l00739"></a>00739 
-<a name="l00749"></a><a class="code" href="classInteger.html#a952b384ed1bfaf53196af505c20ca8d8">00749</a>         <span class="keyword">friend</span> <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#a952b384ed1bfaf53196af505c20ca8d8">pow</a> (<a class="code" href="classInteger.html">Integer</a> x, <span class="keywordtype">int</span> e) 
-<a name="l00750"></a>00750         {
-<a name="l00751"></a>00751                 <span class="keywordflow">return</span> x.<a class="code" href="classInteger.html#a952b384ed1bfaf53196af505c20ca8d8">pow</a>(e);
-<a name="l00752"></a>00752         }
-<a name="l00753"></a>00753 
-<a name="l00754"></a>00754         <span class="keyword">private</span>:
-<a name="l00755"></a>00755         <span class="comment">// ----</span>
-<a name="l00756"></a>00756         <span class="comment">// data</span>
-<a name="l00757"></a>00757         <span class="comment">// ----</span>
-<a name="l00758"></a><a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">00758</a>         <span class="keywordtype">int</span> <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>;
-<a name="l00759"></a><a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">00759</a>         <span class="keywordtype">bool</span> <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>;
-<a name="l00760"></a><a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">00760</a>         C <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>;
-<a name="l00761"></a>00761 
-<a name="l00762"></a>00762         <span class="keyword">private</span>:
-<a name="l00763"></a>00763         <span class="comment">// -----</span>
-<a name="l00764"></a>00764         <span class="comment">// valid</span>
-<a name="l00765"></a>00765         <span class="comment">// -----</span>
-<a name="l00766"></a>00766 
-<a name="l00770"></a><a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">00770</a>         <span class="keywordtype">bool</span> <a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a> ()<span class="keyword"> const </span>
-<a name="l00771"></a>00771 <span class="keyword">        </span>{
-<a name="l00772"></a>00772                 <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> &lt; 1)
-<a name="l00773"></a>00773                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00774"></a>00774 
-<a name="l00775"></a>00775                 <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> == 1 &amp;&amp; <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>[0] == 0 &amp;&amp; <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>)
-<a name="l00776"></a>00776                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00777"></a>00777 
-<a name="l00778"></a>00778                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00779"></a>00779         }
-<a name="l00780"></a>00780 
-<a name="l00785"></a><a class="code" href="classInteger.html#aa677756757bd1bf3b63a3c5c40e7c07f">00785</a>         <span class="keywordtype">void</span> <a class="code" href="classInteger.html#aa677756757bd1bf3b63a3c5c40e7c07f">setup_integer</a>(<span class="keywordtype">int</span>&amp; value)
-<a name="l00786"></a>00786         {
-<a name="l00787"></a>00787                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> = 0;
-<a name="l00788"></a>00788                 <span class="keywordflow">if</span>(value &gt; 0)
-<a name="l00789"></a>00789                 {
-<a name="l00790"></a>00790                         <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
-<a name="l00791"></a>00791                 }
-<a name="l00792"></a>00792                 <span class="keywordflow">else</span> <span class="keywordflow">if</span>(value &lt; 0)
-<a name="l00793"></a>00793                 {
-<a name="l00794"></a>00794                         <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">true</span>;
-<a name="l00795"></a>00795                         value *= -1;
-<a name="l00796"></a>00796                 }
-<a name="l00797"></a>00797                 <span class="keywordflow">else</span>
-<a name="l00798"></a>00798                 {
-<a name="l00799"></a>00799                         <a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">set_single_digit</a>(0);
-<a name="l00800"></a>00800                 }
-<a name="l00801"></a>00801 
-<a name="l00802"></a>00802                 <span class="keywordflow">while</span>(value != 0)
-<a name="l00803"></a>00803                 {
-<a name="l00804"></a>00804                         <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.push_back(value % 10);
-<a name="l00805"></a>00805                         value /= 10;
-<a name="l00806"></a>00806                         ++<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>;
-<a name="l00807"></a>00807                 }
-<a name="l00808"></a>00808                 <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.resize(<a class="code" href="Integer_8h.html#a70ed59adcb4159ac551058053e649640">SIZE</a>);
-<a name="l00809"></a>00809         }
-<a name="l00810"></a>00810 
-<a name="l00815"></a><a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">00815</a>         <span class="keywordtype">void</span> <a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">set_single_digit</a>(<span class="keywordtype">int</span>&amp;&amp; value)
-<a name="l00816"></a>00816         {
-<a name="l00817"></a>00817                 assert(value &gt;= 0 &amp;&amp; value &lt; 10);
-<a name="l00818"></a>00818                 <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
-<a name="l00819"></a>00819                 <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.clear();
-<a name="l00820"></a>00820                 <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.push_back(value);
-<a name="l00821"></a>00821                 <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.resize(<a class="code" href="Integer_8h.html#a70ed59adcb4159ac551058053e649640">SIZE</a>);
-<a name="l00822"></a>00822                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> = 1;
-<a name="l00823"></a>00823         }
-<a name="l00824"></a>00824 
-<a name="l00829"></a><a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">00829</a>         <span class="keywordtype">void</span> <a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">set_digit_count</a>(<span class="keyword">typename</span> C::iterator e)
-<a name="l00830"></a>00830         {
-<a name="l00831"></a>00831                 <span class="comment">// Set digits</span>
-<a name="l00832"></a>00832                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> = e - <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin();
-<a name="l00833"></a>00833         }
-<a name="l00834"></a>00834 
-<a name="l00839"></a><a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">00839</a>         <span class="keywordtype">void</span> <a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">resize</a>(<span class="keyword">typename</span> C::size_type size)
-<a name="l00840"></a>00840         {       
-<a name="l00841"></a>00841                 <span class="comment">// Resize the container</span>
-<a name="l00842"></a>00842                 <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.size() &lt; 2 * size)
-<a name="l00843"></a>00843                         <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.resize(2 * size);
-<a name="l00844"></a>00844         }
-<a name="l00845"></a>00845 
-<a name="l00846"></a>00846         <span class="keyword">public</span>:
-<a name="l00847"></a>00847         <span class="comment">// ------------</span>
-<a name="l00848"></a>00848         <span class="comment">// constructors</span>
-<a name="l00849"></a>00849         <span class="comment">// ------------</span>
-<a name="l00850"></a>00850 
-<a name="l00855"></a><a class="code" href="classInteger.html#a1d5315e4ec5b56b8cb3a6991d514f7d6">00855</a>         <a class="code" href="classInteger.html#a1d5315e4ec5b56b8cb3a6991d514f7d6">Integer</a> (<span class="keywordtype">int</span> value)
-<a name="l00856"></a>00856         {
-<a name="l00857"></a>00857                 <a class="code" href="classInteger.html#aa677756757bd1bf3b63a3c5c40e7c07f">setup_integer</a>(value);
-<a name="l00858"></a>00858                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l00859"></a>00859         }
-<a name="l00860"></a>00860 
-<a name="l00866"></a><a class="code" href="classInteger.html#afebf72d47413ceedcc30b74c3055b771">00866</a>         <span class="keyword">explicit</span> <a class="code" href="classInteger.html#a1d5315e4ec5b56b8cb3a6991d514f7d6">Integer</a> (<span class="keyword">const</span> std::string&amp; value)
-<a name="l00867"></a>00867         {
-<a name="l00868"></a>00868                 <span class="keyword">static</span> std::string zero = <span class="stringliteral">&quot;0&quot;</span>;
-<a name="l00869"></a>00869                 <span class="keywordflow">if</span>(value == zero)
-<a name="l00870"></a>00870                 {
-<a name="l00871"></a>00871                         <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
-<a name="l00872"></a>00872                         <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.push_back(0);
-<a name="l00873"></a>00873                         <span class="keywordflow">return</span>;
-<a name="l00874"></a>00874                 }
-<a name="l00875"></a>00875 
-<a name="l00876"></a>00876                 <span class="keywordtype">int</span> ival = strtol(value.c_str(), <span class="keyword">nullptr</span>, 10);
-<a name="l00877"></a>00877                 <span class="keywordflow">if</span> (ival == 0)
-<a name="l00878"></a>00878                         <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;The string Value must represent a number.&quot;</span>);
-<a name="l00879"></a>00879                 <span class="keywordflow">else</span>
-<a name="l00880"></a>00880                         <a class="code" href="classInteger.html#aa677756757bd1bf3b63a3c5c40e7c07f">setup_integer</a>(ival);
-<a name="l00881"></a>00881                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l00882"></a>00882         }
-<a name="l00883"></a>00883 
-<a name="l00884"></a>00884         <span class="comment">// Default copy, destructor, and copy asnegativement.</span>
-<a name="l00885"></a>00885         <span class="comment">// Integer (const Integer&amp;);</span>
-<a name="l00886"></a>00886         <span class="comment">// ~Integer ();</span>
-<a name="l00887"></a>00887         <span class="comment">// Integer&amp; operator = (const Integer&amp;);</span>
-<a name="l00888"></a>00888 
-<a name="l00889"></a>00889         <span class="comment">// ----------</span>
-<a name="l00890"></a>00890         <span class="comment">// operator -</span>
-<a name="l00891"></a>00891         <span class="comment">// ----------</span>
-<a name="l00892"></a>00892 
-<a name="l00897"></a><a class="code" href="classInteger.html#ae9d1fb575b55ac2f6352a2d735c4bb75">00897</a>         <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#ae9d1fb575b55ac2f6352a2d735c4bb75">operator - </a>()<span class="keyword"> const </span>
-<a name="l00898"></a>00898 <span class="keyword">        </span>{
-<a name="l00899"></a>00899                 <a class="code" href="classInteger.html">Integer</a> x(*<span class="keyword">this</span>);
-<a name="l00900"></a>00900                 <span class="keywordflow">if</span>(x != 0)
-<a name="l00901"></a>00901                         x.<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = !<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>;
-<a name="l00902"></a>00902                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l00903"></a>00903                 <span class="keywordflow">return</span> x;
-<a name="l00904"></a>00904         }
-<a name="l00905"></a>00905 
-<a name="l00906"></a>00906         <span class="comment">// -----------</span>
-<a name="l00907"></a>00907         <span class="comment">// operator ++</span>
-<a name="l00908"></a>00908         <span class="comment">// -----------</span>
-<a name="l00909"></a>00909 
-<a name="l00914"></a><a class="code" href="classInteger.html#a3fc47ae07dce44aa72ce9e02b9a3e003">00914</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a3fc47ae07dce44aa72ce9e02b9a3e003">operator ++ </a>() 
-<a name="l00915"></a>00915         {
-<a name="l00916"></a>00916                 *<span class="keyword">this</span> += 1;
-<a name="l00917"></a>00917                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l00918"></a>00918                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00919"></a>00919         }
-<a name="l00920"></a>00920 
-<a name="l00926"></a><a class="code" href="classInteger.html#a326d5bd7d72ad858f523bed95ae66150">00926</a>         <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#a3fc47ae07dce44aa72ce9e02b9a3e003">operator ++ </a>(<span class="keywordtype">int</span>) 
-<a name="l00927"></a>00927         {
-<a name="l00928"></a>00928                 <a class="code" href="classInteger.html">Integer</a> x = *<span class="keyword">this</span>;
-<a name="l00929"></a>00929                 ++(*this);
-<a name="l00930"></a>00930                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l00931"></a>00931                 <span class="keywordflow">return</span> x;
-<a name="l00932"></a>00932         }
-<a name="l00933"></a>00933 
-<a name="l00934"></a>00934         <span class="comment">// -----------</span>
-<a name="l00935"></a>00935         <span class="comment">// operator --</span>
-<a name="l00936"></a>00936         <span class="comment">// -----------</span>
-<a name="l00937"></a>00937 
-<a name="l00942"></a><a class="code" href="classInteger.html#ac6227ea2b4a75ff08d537db0d3a26be4">00942</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#ac6227ea2b4a75ff08d537db0d3a26be4">operator -- </a>() 
-<a name="l00943"></a>00943         {
-<a name="l00944"></a>00944                 *<span class="keyword">this</span> -= 1;
-<a name="l00945"></a>00945                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l00946"></a>00946                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00947"></a>00947         }
-<a name="l00948"></a>00948 
-<a name="l00954"></a><a class="code" href="classInteger.html#ae5b697679221dbf1fbc942335bb19fb4">00954</a>         <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#ac6227ea2b4a75ff08d537db0d3a26be4">operator -- </a>(<span class="keywordtype">int</span>) 
-<a name="l00955"></a>00955         {
-<a name="l00956"></a>00956                 <a class="code" href="classInteger.html">Integer</a> x = *<span class="keyword">this</span>;
-<a name="l00957"></a>00957                 --(*this);
-<a name="l00958"></a>00958                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l00959"></a>00959                 <span class="keywordflow">return</span> x;
-<a name="l00960"></a>00960         }
-<a name="l00961"></a>00961 
-<a name="l00962"></a>00962         <span class="comment">// -----------</span>
-<a name="l00963"></a>00963         <span class="comment">// operator +=</span>
-<a name="l00964"></a>00964         <span class="comment">// -----------</span>
-<a name="l00965"></a>00965 
-<a name="l00971"></a><a class="code" href="classInteger.html#a0c37e366a26b17cfd73b1b29a1e8b47b">00971</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a0c37e366a26b17cfd73b1b29a1e8b47b">operator += </a>(<span class="keyword">const</span> <a class="code" href="classInteger.html">Integer</a>&amp; rhs) 
-<a name="l00972"></a>00972         {
-<a name="l00973"></a>00973                 <a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">resize</a>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>);
-<a name="l00974"></a>00974                 <span class="keywordflow">if</span>(!<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> &amp;&amp; !rhs.<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>)
-<a name="l00975"></a>00975                 {
-<a name="l00976"></a>00976                         <a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">set_digit_count</a>(<a class="code" href="Integer_8h.html#aa5a086af2f5477d3d8220506bdb5cb30">plus_digits</a>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin()));
-<a name="l00977"></a>00977                 }
-<a name="l00978"></a>00978                 <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> &amp;&amp; !rhs.<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>)
-<a name="l00979"></a>00979                 {
-<a name="l00980"></a>00980                         <span class="keywordflow">if</span>(-(*<span class="keyword">this</span>) &lt; rhs)
-<a name="l00981"></a>00981                         {
-<a name="l00982"></a>00982                                 <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
-<a name="l00983"></a>00983                                 <a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">set_digit_count</a>(<a class="code" href="Integer_8h.html#a64ab3a5731bf11bf30b37ed1e8bb3819">minus_digits</a>(rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin()));
-<a name="l00984"></a>00984                         }
-<a name="l00985"></a>00985                         <span class="keywordflow">else</span> <span class="keywordflow">if</span>(-(*<span class="keyword">this</span>) == rhs)
-<a name="l00986"></a>00986                         {
-<a name="l00987"></a>00987                                 <a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">set_single_digit</a>(0);
-<a name="l00988"></a>00988                         }
-<a name="l00989"></a>00989                         <span class="keywordflow">else</span>
-<a name="l00990"></a>00990                         {
-<a name="l00991"></a>00991                                 <a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">set_digit_count</a>(<a class="code" href="Integer_8h.html#a64ab3a5731bf11bf30b37ed1e8bb3819">minus_digits</a>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin()));
+<a name="l00710"></a><a class="code" href="classInteger.html#a76099b70bb34d31b3874482f89e24ccd">00710</a>         <span class="keyword">friend</span> std::ostream&amp; <a class="code" href="classInteger.html#aaf32bc4191034ed250a064aa6796ade5">operator &lt;&lt; </a>(std::ostream&amp; lhs, <span class="keyword">const</span> <a class="code" href="classInteger.html">Integer</a>&amp; rhs) 
+<a name="l00711"></a>00711         {
+<a name="l00712"></a>00712                 <span class="keyword">static</span> std::string negative_str = <span class="stringliteral">&quot;-&quot;</span>;
+<a name="l00713"></a>00713                 <span class="keywordflow">if</span>(rhs.<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>)
+<a name="l00714"></a>00714                         lhs &lt;&lt; negative_str;
+<a name="l00715"></a>00715 
+<a name="l00716"></a>00716                 <span class="keywordflow">for</span>(<span class="keyword">auto</span> rb = rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> - 1; rb != rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(); --rb)
+<a name="l00717"></a>00717                         lhs &lt;&lt; *rb;
+<a name="l00718"></a>00718                 lhs &lt;&lt; *rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin();
+<a name="l00719"></a>00719                 <span class="keywordflow">return</span> lhs;
+<a name="l00720"></a>00720         }
+<a name="l00721"></a>00721 
+<a name="l00722"></a>00722         <span class="comment">// ---</span>
+<a name="l00723"></a>00723         <span class="comment">// abs</span>
+<a name="l00724"></a>00724         <span class="comment">// ---</span>
+<a name="l00725"></a>00725 
+<a name="l00732"></a><a class="code" href="classInteger.html#ac872a9e1c5a2e8e1457baf75e439f8da">00732</a>         <span class="keyword">friend</span> <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#a28b38b99580e4787e353c6630c3cf063">abs</a> (<a class="code" href="classInteger.html">Integer</a> x) 
+<a name="l00733"></a>00733         {
+<a name="l00734"></a>00734                 <span class="keywordflow">return</span> x.<a class="code" href="classInteger.html#ac872a9e1c5a2e8e1457baf75e439f8da">abs</a>();
+<a name="l00735"></a>00735         }
+<a name="l00736"></a>00736 
+<a name="l00737"></a>00737         <span class="comment">// ---</span>
+<a name="l00738"></a>00738         <span class="comment">// pow</span>
+<a name="l00739"></a>00739         <span class="comment">// ---</span>
+<a name="l00740"></a>00740 
+<a name="l00750"></a><a class="code" href="classInteger.html#a952b384ed1bfaf53196af505c20ca8d8">00750</a>         <span class="keyword">friend</span> <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#a952b384ed1bfaf53196af505c20ca8d8">pow</a> (<a class="code" href="classInteger.html">Integer</a> x, <span class="keywordtype">int</span> e) 
+<a name="l00751"></a>00751         {
+<a name="l00752"></a>00752                 <span class="keywordflow">return</span> x.<a class="code" href="classInteger.html#a952b384ed1bfaf53196af505c20ca8d8">pow</a>(e);
+<a name="l00753"></a>00753         }
+<a name="l00754"></a>00754 
+<a name="l00755"></a>00755         <span class="keyword">private</span>:
+<a name="l00756"></a>00756         <span class="comment">// ----</span>
+<a name="l00757"></a>00757         <span class="comment">// data</span>
+<a name="l00758"></a>00758         <span class="comment">// ----</span>
+<a name="l00759"></a><a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">00759</a>         <span class="keywordtype">int</span> <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>;
+<a name="l00760"></a><a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">00760</a>         <span class="keywordtype">bool</span> <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>;
+<a name="l00761"></a><a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">00761</a>         C <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>;
+<a name="l00762"></a>00762 
+<a name="l00763"></a>00763         <span class="keyword">private</span>:
+<a name="l00764"></a>00764         <span class="comment">// -----</span>
+<a name="l00765"></a>00765         <span class="comment">// valid</span>
+<a name="l00766"></a>00766         <span class="comment">// -----</span>
+<a name="l00767"></a>00767 
+<a name="l00771"></a><a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">00771</a>         <span class="keywordtype">bool</span> <a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a> ()<span class="keyword"> const </span>
+<a name="l00772"></a>00772 <span class="keyword">        </span>{
+<a name="l00773"></a>00773                 <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> &lt; 1)
+<a name="l00774"></a>00774                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00775"></a>00775 
+<a name="l00776"></a>00776                 <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> == 1 &amp;&amp; <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>[0] == 0 &amp;&amp; <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>)
+<a name="l00777"></a>00777                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00778"></a>00778 
+<a name="l00779"></a>00779                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00780"></a>00780         }
+<a name="l00781"></a>00781 
+<a name="l00786"></a><a class="code" href="classInteger.html#aa677756757bd1bf3b63a3c5c40e7c07f">00786</a>         <span class="keywordtype">void</span> <a class="code" href="classInteger.html#aa677756757bd1bf3b63a3c5c40e7c07f">setup_integer</a>(<span class="keywordtype">int</span>&amp; value)
+<a name="l00787"></a>00787         {
+<a name="l00788"></a>00788                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> = 0;
+<a name="l00789"></a>00789                 <span class="keywordflow">if</span>(value &gt; 0)
+<a name="l00790"></a>00790                 {
+<a name="l00791"></a>00791                         <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
+<a name="l00792"></a>00792                 }
+<a name="l00793"></a>00793                 <span class="keywordflow">else</span> <span class="keywordflow">if</span>(value &lt; 0)
+<a name="l00794"></a>00794                 {
+<a name="l00795"></a>00795                         <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">true</span>;
+<a name="l00796"></a>00796                         value *= -1;
+<a name="l00797"></a>00797                 }
+<a name="l00798"></a>00798                 <span class="keywordflow">else</span>
+<a name="l00799"></a>00799                 {
+<a name="l00800"></a>00800                         <a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">set_single_digit</a>(0);
+<a name="l00801"></a>00801                 }
+<a name="l00802"></a>00802 
+<a name="l00803"></a>00803                 <span class="keywordflow">while</span>(value != 0)
+<a name="l00804"></a>00804                 {
+<a name="l00805"></a>00805                         <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.push_back(value % 10);
+<a name="l00806"></a>00806                         value /= 10;
+<a name="l00807"></a>00807                         ++<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>;
+<a name="l00808"></a>00808                 }
+<a name="l00809"></a>00809                 <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.resize(<a class="code" href="Integer_8h.html#a70ed59adcb4159ac551058053e649640">SIZE</a>);
+<a name="l00810"></a>00810         }
+<a name="l00811"></a>00811 
+<a name="l00816"></a><a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">00816</a>         <span class="keywordtype">void</span> <a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">set_single_digit</a>(<span class="keywordtype">int</span>&amp;&amp; value)
+<a name="l00817"></a>00817         {
+<a name="l00818"></a>00818                 assert(value &gt;= 0 &amp;&amp; value &lt; 10);
+<a name="l00819"></a>00819                 <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
+<a name="l00820"></a>00820                 <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.clear();
+<a name="l00821"></a>00821                 <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.push_back(value);
+<a name="l00822"></a>00822                 <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.resize(<a class="code" href="Integer_8h.html#a70ed59adcb4159ac551058053e649640">SIZE</a>);
+<a name="l00823"></a>00823                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> = 1;
+<a name="l00824"></a>00824         }
+<a name="l00825"></a>00825 
+<a name="l00830"></a><a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">00830</a>         <span class="keywordtype">void</span> <a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">set_digit_count</a>(<span class="keyword">typename</span> C::iterator e)
+<a name="l00831"></a>00831         {
+<a name="l00832"></a>00832                 <span class="comment">// Set digits</span>
+<a name="l00833"></a>00833                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> = e - <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin();
+<a name="l00834"></a>00834         }
+<a name="l00835"></a>00835 
+<a name="l00840"></a><a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">00840</a>         <span class="keywordtype">void</span> <a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">resize</a>(<span class="keyword">typename</span> C::size_type size)
+<a name="l00841"></a>00841         {       
+<a name="l00842"></a>00842                 <span class="comment">// Resize the container</span>
+<a name="l00843"></a>00843                 <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.size() &lt; 2 * size)
+<a name="l00844"></a>00844                         <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.resize(2 * size);
+<a name="l00845"></a>00845         }
+<a name="l00846"></a>00846 
+<a name="l00847"></a>00847         <span class="keyword">public</span>:
+<a name="l00848"></a>00848         <span class="comment">// ------------</span>
+<a name="l00849"></a>00849         <span class="comment">// constructors</span>
+<a name="l00850"></a>00850         <span class="comment">// ------------</span>
+<a name="l00851"></a>00851 
+<a name="l00856"></a><a class="code" href="classInteger.html#a1d5315e4ec5b56b8cb3a6991d514f7d6">00856</a>         <a class="code" href="classInteger.html#a1d5315e4ec5b56b8cb3a6991d514f7d6">Integer</a> (<span class="keywordtype">int</span> value)
+<a name="l00857"></a>00857         {
+<a name="l00858"></a>00858                 <a class="code" href="classInteger.html#aa677756757bd1bf3b63a3c5c40e7c07f">setup_integer</a>(value);
+<a name="l00859"></a>00859                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l00860"></a>00860         }
+<a name="l00861"></a>00861 
+<a name="l00867"></a><a class="code" href="classInteger.html#afebf72d47413ceedcc30b74c3055b771">00867</a>         <span class="keyword">explicit</span> <a class="code" href="classInteger.html#a1d5315e4ec5b56b8cb3a6991d514f7d6">Integer</a> (<span class="keyword">const</span> std::string&amp; value)
+<a name="l00868"></a>00868         {
+<a name="l00869"></a>00869                 <span class="keyword">static</span> std::string zero = <span class="stringliteral">&quot;0&quot;</span>;
+<a name="l00870"></a>00870                 <span class="keywordflow">if</span>(value == zero)
+<a name="l00871"></a>00871                 {
+<a name="l00872"></a>00872                         <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
+<a name="l00873"></a>00873                         <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.push_back(0);
+<a name="l00874"></a>00874                         <span class="keywordflow">return</span>;
+<a name="l00875"></a>00875                 }
+<a name="l00876"></a>00876 
+<a name="l00877"></a>00877                 <span class="keywordtype">int</span> ival = strtol(value.c_str(), <span class="keyword">nullptr</span>, 10);
+<a name="l00878"></a>00878                 <span class="keywordflow">if</span> (ival == 0)
+<a name="l00879"></a>00879                         <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;The string Value must represent a number.&quot;</span>);
+<a name="l00880"></a>00880                 <span class="keywordflow">else</span>
+<a name="l00881"></a>00881                         <a class="code" href="classInteger.html#aa677756757bd1bf3b63a3c5c40e7c07f">setup_integer</a>(ival);
+<a name="l00882"></a>00882                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l00883"></a>00883         }
+<a name="l00884"></a>00884 
+<a name="l00885"></a>00885         <span class="comment">// Default copy, destructor, and copy asnegativement.</span>
+<a name="l00886"></a>00886         <span class="comment">// Integer (const Integer&amp;);</span>
+<a name="l00887"></a>00887         <span class="comment">// ~Integer ();</span>
+<a name="l00888"></a>00888         <span class="comment">// Integer&amp; operator = (const Integer&amp;);</span>
+<a name="l00889"></a>00889 
+<a name="l00890"></a>00890         <span class="comment">// ----------</span>
+<a name="l00891"></a>00891         <span class="comment">// operator -</span>
+<a name="l00892"></a>00892         <span class="comment">// ----------</span>
+<a name="l00893"></a>00893 
+<a name="l00898"></a><a class="code" href="classInteger.html#ae9d1fb575b55ac2f6352a2d735c4bb75">00898</a>         <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#ae9d1fb575b55ac2f6352a2d735c4bb75">operator - </a>()<span class="keyword"> const </span>
+<a name="l00899"></a>00899 <span class="keyword">        </span>{
+<a name="l00900"></a>00900                 <a class="code" href="classInteger.html">Integer</a> x(*<span class="keyword">this</span>);
+<a name="l00901"></a>00901                 <span class="keywordflow">if</span>(x != 0)
+<a name="l00902"></a>00902                         x.<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = !<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>;
+<a name="l00903"></a>00903                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l00904"></a>00904                 <span class="keywordflow">return</span> x;
+<a name="l00905"></a>00905         }
+<a name="l00906"></a>00906 
+<a name="l00907"></a>00907         <span class="comment">// -----------</span>
+<a name="l00908"></a>00908         <span class="comment">// operator ++</span>
+<a name="l00909"></a>00909         <span class="comment">// -----------</span>
+<a name="l00910"></a>00910 
+<a name="l00915"></a><a class="code" href="classInteger.html#a3fc47ae07dce44aa72ce9e02b9a3e003">00915</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a3fc47ae07dce44aa72ce9e02b9a3e003">operator ++ </a>() 
+<a name="l00916"></a>00916         {
+<a name="l00917"></a>00917                 *<span class="keyword">this</span> += 1;
+<a name="l00918"></a>00918                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l00919"></a>00919                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00920"></a>00920         }
+<a name="l00921"></a>00921 
+<a name="l00927"></a><a class="code" href="classInteger.html#a326d5bd7d72ad858f523bed95ae66150">00927</a>         <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#a3fc47ae07dce44aa72ce9e02b9a3e003">operator ++ </a>(<span class="keywordtype">int</span>) 
+<a name="l00928"></a>00928         {
+<a name="l00929"></a>00929                 <a class="code" href="classInteger.html">Integer</a> x = *<span class="keyword">this</span>;
+<a name="l00930"></a>00930                 ++(*this);
+<a name="l00931"></a>00931                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l00932"></a>00932                 <span class="keywordflow">return</span> x;
+<a name="l00933"></a>00933         }
+<a name="l00934"></a>00934 
+<a name="l00935"></a>00935         <span class="comment">// -----------</span>
+<a name="l00936"></a>00936         <span class="comment">// operator --</span>
+<a name="l00937"></a>00937         <span class="comment">// -----------</span>
+<a name="l00938"></a>00938 
+<a name="l00943"></a><a class="code" href="classInteger.html#ac6227ea2b4a75ff08d537db0d3a26be4">00943</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#ac6227ea2b4a75ff08d537db0d3a26be4">operator -- </a>() 
+<a name="l00944"></a>00944         {
+<a name="l00945"></a>00945                 *<span class="keyword">this</span> -= 1;
+<a name="l00946"></a>00946                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l00947"></a>00947                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00948"></a>00948         }
+<a name="l00949"></a>00949 
+<a name="l00955"></a><a class="code" href="classInteger.html#ae5b697679221dbf1fbc942335bb19fb4">00955</a>         <a class="code" href="classInteger.html">Integer</a> <a class="code" href="classInteger.html#ac6227ea2b4a75ff08d537db0d3a26be4">operator -- </a>(<span class="keywordtype">int</span>) 
+<a name="l00956"></a>00956         {
+<a name="l00957"></a>00957                 <a class="code" href="classInteger.html">Integer</a> x = *<span class="keyword">this</span>;
+<a name="l00958"></a>00958                 --(*this);
+<a name="l00959"></a>00959                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l00960"></a>00960                 <span class="keywordflow">return</span> x;
+<a name="l00961"></a>00961         }
+<a name="l00962"></a>00962 
+<a name="l00963"></a>00963         <span class="comment">// -----------</span>
+<a name="l00964"></a>00964         <span class="comment">// operator +=</span>
+<a name="l00965"></a>00965         <span class="comment">// -----------</span>
+<a name="l00966"></a>00966 
+<a name="l00972"></a><a class="code" href="classInteger.html#a0c37e366a26b17cfd73b1b29a1e8b47b">00972</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a0c37e366a26b17cfd73b1b29a1e8b47b">operator += </a>(<span class="keyword">const</span> <a class="code" href="classInteger.html">Integer</a>&amp; rhs) 
+<a name="l00973"></a>00973         {
+<a name="l00974"></a>00974                 <a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">resize</a>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>);
+<a name="l00975"></a>00975                 <span class="keywordflow">if</span>(!<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> &amp;&amp; !rhs.<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>)
+<a name="l00976"></a>00976                 {
+<a name="l00977"></a>00977                         <a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">set_digit_count</a>(<a class="code" href="Integer_8h.html#aa5a086af2f5477d3d8220506bdb5cb30">plus_digits</a>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin()));
+<a name="l00978"></a>00978                 }
+<a name="l00979"></a>00979                 <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> &amp;&amp; !rhs.<a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a>)
+<a name="l00980"></a>00980                 {
+<a name="l00981"></a>00981                         <span class="keywordflow">if</span>(-(*<span class="keyword">this</span>) &lt; rhs)
+<a name="l00982"></a>00982                         {
+<a name="l00983"></a>00983                                 <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
+<a name="l00984"></a>00984                                 <a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">set_digit_count</a>(<a class="code" href="Integer_8h.html#a64ab3a5731bf11bf30b37ed1e8bb3819">minus_digits</a>(rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin()));
+<a name="l00985"></a>00985                         }
+<a name="l00986"></a>00986                         <span class="keywordflow">else</span> <span class="keywordflow">if</span>(-(*<span class="keyword">this</span>) == rhs)
+<a name="l00987"></a>00987                         {
+<a name="l00988"></a>00988                                 <a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">set_single_digit</a>(0);
+<a name="l00989"></a>00989                         }
+<a name="l00990"></a>00990                         <span class="keywordflow">else</span>
+<a name="l00991"></a>00991                         {
 <a name="l00992"></a>00992                                 <a class="code" href="classInteger.html#a3b451a8fec850ef88c8d3ee4351f7a59">set_digit_count</a>(<a class="code" href="Integer_8h.html#a64ab3a5731bf11bf30b37ed1e8bb3819">minus_digits</a>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), rhs.<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + rhs.<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin()));
 <a name="l00993"></a>00993                         }
 <a name="l00994"></a>00994                 }
@@ -993,64 +992,81 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01172"></a>01172 
 <a name="l01179"></a><a class="code" href="classInteger.html#a4114e69e0da713f50f9cf946cfc70637">01179</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a4114e69e0da713f50f9cf946cfc70637">operator &lt;&lt;= </a>(<span class="keywordtype">int</span> n) 
 <a name="l01180"></a>01180         {
-<a name="l01181"></a>01181                 <a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">resize</a>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> + n);
-<a name="l01182"></a>01182                 <a class="code" href="Integer_8h.html#a256912b8b1003d57a93563ce2e8609f7">inverse_shift_left_digits</a>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, n, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin());
-<a name="l01183"></a>01183                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> += n;
-<a name="l01184"></a>01184                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l01185"></a>01185                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l01186"></a>01186         }
-<a name="l01187"></a>01187 
-<a name="l01188"></a>01188         <span class="comment">// ------------</span>
-<a name="l01189"></a>01189         <span class="comment">// operator &gt;&gt;=</span>
-<a name="l01190"></a>01190         <span class="comment">// ------------</span>
-<a name="l01191"></a>01191 
-<a name="l01198"></a><a class="code" href="classInteger.html#a0fbada94834715ce6b91c39e5d41d24f">01198</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a0fbada94834715ce6b91c39e5d41d24f">operator &gt;&gt;= </a>(<span class="keywordtype">int</span> n) 
-<a name="l01199"></a>01199         {
-<a name="l01200"></a>01200                 <a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">resize</a>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> + n);
-<a name="l01201"></a>01201                 <a class="code" href="Integer_8h.html#a48350c008268dff84365430a54395aa3">shift_right_digits</a>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, n, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin());
-<a name="l01202"></a>01202                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> -= n;
-<a name="l01203"></a>01203                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l01204"></a>01204                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l01205"></a>01205         }
-<a name="l01206"></a>01206 
-<a name="l01207"></a>01207         <span class="comment">// ---</span>
-<a name="l01208"></a>01208         <span class="comment">// abs</span>
-<a name="l01209"></a>01209         <span class="comment">// ---</span>
-<a name="l01210"></a>01210 
-<a name="l01215"></a><a class="code" href="classInteger.html#a28b38b99580e4787e353c6630c3cf063">01215</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a28b38b99580e4787e353c6630c3cf063">abs</a> () 
-<a name="l01216"></a>01216         {
-<a name="l01217"></a>01217                 <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
-<a name="l01218"></a>01218                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l01219"></a>01219                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l01220"></a>01220         }
-<a name="l01221"></a>01221 
-<a name="l01222"></a>01222         <span class="comment">// ---</span>
-<a name="l01223"></a>01223         <span class="comment">// pow</span>
+<a name="l01181"></a>01181                 <span class="keywordflow">if</span>(n &lt; 0)
+<a name="l01182"></a>01182                         <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;The shift value cannot be a negative number.&quot;</span>);
+<a name="l01183"></a>01183                 
+<a name="l01184"></a>01184                 <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> == 1 &amp;&amp; <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>[0] == 0)
+<a name="l01185"></a>01185                         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l01186"></a>01186 
+<a name="l01187"></a>01187                 <a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">resize</a>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> + n);
+<a name="l01188"></a>01188                 <a class="code" href="Integer_8h.html#a256912b8b1003d57a93563ce2e8609f7">inverse_shift_left_digits</a>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, n, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin());
+<a name="l01189"></a>01189                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> += n;
+<a name="l01190"></a>01190                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l01191"></a>01191                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l01192"></a>01192         }
+<a name="l01193"></a>01193 
+<a name="l01194"></a>01194         <span class="comment">// ------------</span>
+<a name="l01195"></a>01195         <span class="comment">// operator &gt;&gt;=</span>
+<a name="l01196"></a>01196         <span class="comment">// ------------</span>
+<a name="l01197"></a>01197 
+<a name="l01204"></a><a class="code" href="classInteger.html#a0fbada94834715ce6b91c39e5d41d24f">01204</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a0fbada94834715ce6b91c39e5d41d24f">operator &gt;&gt;= </a>(<span class="keywordtype">int</span> n) 
+<a name="l01205"></a>01205         {
+<a name="l01206"></a>01206                 <span class="keywordflow">if</span>(n &lt; 0)
+<a name="l01207"></a>01207                         <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;The shift value cannot be a negative number.&quot;</span>);
+<a name="l01208"></a>01208 
+<a name="l01209"></a>01209                 <span class="keywordflow">if</span>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> == 1 &amp;&amp; <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>[0] == 0)
+<a name="l01210"></a>01210                         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l01211"></a>01211 
+<a name="l01212"></a>01212                 <a class="code" href="classInteger.html#a867b7d41eaafa86df6669e809313f569">resize</a>(<a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> + n);
+<a name="l01213"></a>01213                 <a class="code" href="Integer_8h.html#a48350c008268dff84365430a54395aa3">shift_right_digits</a>(<a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin(), <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin() + <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a>, n, <a class="code" href="classInteger.html#aa263bac3c2e5f8aefb87a59ece34f54b">container</a>.begin());
+<a name="l01214"></a>01214                 <a class="code" href="classInteger.html#a7a98ce9d353704d01286e0730883de63">digits</a> -= n;
+<a name="l01215"></a>01215 
+<a name="l01216"></a>01216                 <span class="keywordflow">if</span>(digits == 0)
+<a name="l01217"></a>01217                         <a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">set_single_digit</a>(0);
+<a name="l01218"></a>01218                         
+<a name="l01219"></a>01219 
+<a name="l01220"></a>01220                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l01221"></a>01221                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l01222"></a>01222         }
+<a name="l01223"></a>01223 
 <a name="l01224"></a>01224         <span class="comment">// ---</span>
-<a name="l01225"></a>01225 
-<a name="l01233"></a><a class="code" href="classInteger.html#aae56deca12053a28469749c93c9f7343">01233</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a952b384ed1bfaf53196af505c20ca8d8">pow</a> (<span class="keywordtype">int</span> e) 
-<a name="l01234"></a>01234         {
-<a name="l01235"></a>01235                 <span class="comment">// check base and exponent</span>
-<a name="l01236"></a>01236                 <span class="keywordflow">if</span>(e &lt; 0)
-<a name="l01237"></a>01237                         <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Exponent cannot be less than zero&quot;</span>);
+<a name="l01225"></a>01225         <span class="comment">// abs</span>
+<a name="l01226"></a>01226         <span class="comment">// ---</span>
+<a name="l01227"></a>01227 
+<a name="l01232"></a><a class="code" href="classInteger.html#a28b38b99580e4787e353c6630c3cf063">01232</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a28b38b99580e4787e353c6630c3cf063">abs</a> () 
+<a name="l01233"></a>01233         {
+<a name="l01234"></a>01234                 <a class="code" href="classInteger.html#a24e88cfdddaf8592b50a13b014820d61">negative</a> = <span class="keyword">false</span>;
+<a name="l01235"></a>01235                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l01236"></a>01236                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l01237"></a>01237         }
 <a name="l01238"></a>01238 
-<a name="l01239"></a>01239                 <span class="keywordflow">if</span>(*<span class="keyword">this</span> == 0 &amp;&amp; e == 0)
-<a name="l01240"></a>01240                         <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Exponent and Base cannot be zero&quot;</span>);
-<a name="l01241"></a>01241 
-<a name="l01242"></a>01242                 <span class="keywordflow">if</span>(e == 0)
-<a name="l01243"></a>01243                         <a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">set_single_digit</a>(1);
-<a name="l01244"></a>01244 
-<a name="l01245"></a>01245                 <a class="code" href="classInteger.html">Integer</a> b(*<span class="keyword">this</span>);
-<a name="l01246"></a>01246                 <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt; e; ++i)
-<a name="l01247"></a>01247                 {
-<a name="l01248"></a>01248                         *<span class="keyword">this</span> *= b;
-<a name="l01249"></a>01249                 }
-<a name="l01250"></a>01250                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
-<a name="l01251"></a>01251                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l01252"></a>01252         }
-<a name="l01253"></a>01253 };
-<a name="l01254"></a>01254 
-<a name="l01255"></a>01255 <span class="preprocessor">#endif // Integer_h</span>
+<a name="l01239"></a>01239         <span class="comment">// ---</span>
+<a name="l01240"></a>01240         <span class="comment">// pow</span>
+<a name="l01241"></a>01241         <span class="comment">// ---</span>
+<a name="l01242"></a>01242 
+<a name="l01250"></a><a class="code" href="classInteger.html#aae56deca12053a28469749c93c9f7343">01250</a>         <a class="code" href="classInteger.html">Integer</a>&amp; <a class="code" href="classInteger.html#a952b384ed1bfaf53196af505c20ca8d8">pow</a> (<span class="keywordtype">int</span> e) 
+<a name="l01251"></a>01251         {
+<a name="l01252"></a>01252                 <span class="comment">// check base and exponent</span>
+<a name="l01253"></a>01253                 <span class="keywordflow">if</span>(e &lt; 0)
+<a name="l01254"></a>01254                         <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Exponent cannot be less than zero&quot;</span>);
+<a name="l01255"></a>01255 
+<a name="l01256"></a>01256                 <span class="keywordflow">if</span>(*<span class="keyword">this</span> == 0 &amp;&amp; e == 0)
+<a name="l01257"></a>01257                         <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Exponent and Base cannot be zero&quot;</span>);
+<a name="l01258"></a>01258 
+<a name="l01259"></a>01259                 <span class="keywordflow">if</span>(e == 0)
+<a name="l01260"></a>01260                         <a class="code" href="classInteger.html#a808e705ed4b7790fa3931077361e7182">set_single_digit</a>(1);
+<a name="l01261"></a>01261 
+<a name="l01262"></a>01262                 <a class="code" href="classInteger.html">Integer</a> b(*<span class="keyword">this</span>);
+<a name="l01263"></a>01263                 <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt; e; ++i)
+<a name="l01264"></a>01264                 {
+<a name="l01265"></a>01265                         *<span class="keyword">this</span> *= b;
+<a name="l01266"></a>01266                 }
+<a name="l01267"></a>01267                 assert(<a class="code" href="classInteger.html#ace6a3dac75762d6c42b42285a426828c">valid</a>());
+<a name="l01268"></a>01268                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l01269"></a>01269         }
+<a name="l01270"></a>01270 };
+<a name="l01271"></a>01271 
+<a name="l01272"></a>01272 <span class="preprocessor">#endif // Integer_h</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -1069,7 +1085,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 11 2013 03:34:25 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 11 2013 21:49:43 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

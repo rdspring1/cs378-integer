@@ -25,14 +25,14 @@
 // -----------------
 
 /**
+ * the sequences are of decimal digits
+ * output the shift left of the input sequence into the output sequence
+ * ([b, e) << n) => x
  * @param b an iterator to the beginning of an input  sequence (inclusive)
  * @param e an iterator to the end       of an input  sequence (exclusive)
  * @param n - the number of positions to shift the sequence
  * @param x an iterator to the beginning of an output sequence (inclusive)
  * @return  an iterator to the end       of an output sequence (exclusive)
- * the sequences are of decimal digits
- * output the shift left of the input sequence into the output sequence
- * ([b, e) << n) => x
  */
 	template <typename II, typename OI>
 OI shift_left_digits (II b, II e, int n, OI x) 
@@ -62,14 +62,14 @@ OI shift_left_digits (II b, II e, int n, OI x)
 // ------------------
 
 /**
+ * the sequences are of decimal digits
+ * output the shift right of the input sequence into the output sequence
+ * ([b, e) >> n) => x
  * @param b an iterator to the beginning of an input  sequence (inclusive)
  * @param e an iterator to the end       of an input  sequence (exclusive)
  * @param n - the number of positions to shift the sequence
  * @param x an iterator to the beginning of an output sequence (inclusive)
  * @return  an iterator to the end       of an output sequence (exclusive)
- * the sequences are of decimal digits
- * output the shift right of the input sequence into the output sequence
- * ([b, e) >> n) => x
  */
 	template <typename II, typename OI>
 OI shift_right_digits (II b, II e, int n, OI x) 
@@ -107,14 +107,14 @@ OI shift_right_digits (II b, II e, int n, OI x)
 // ------------------
 
 /**
+ * the sequences are of decimal digits
+ * output the inverse of the shift left of the input sequence into the output sequence
+ * ([b, e) >> n) => x
  * @param b an iterator to the beginning of an input  sequence (inclusive)
  * @param e an iterator to the end       of an input  sequence (exclusive)
  * @param n - the number of positions to shift the sequence
  * @param x an iterator to the beginning of an output sequence (inclusive)
  * @return  an iterator to the end       of an output sequence (exclusive)
- * the sequences are of decimal digits
- * output the inverse of the shift left of the input sequence into the output sequence
- * ([b, e) >> n) => x
  */
 	template <typename II, typename OI>
 OI inverse_shift_left_digits (II b, II e, int n, OI x) 
@@ -147,15 +147,15 @@ OI inverse_shift_left_digits (II b, II e, int n, OI x)
 // -----------
 
 /**
+ * the sequences are of decimal digits
+ * output the sum of the two input sequences into the output sequence
+ * ([b1, e1) + [b2, e2)) => x
  * @param b1  an iterator to the beginning of an input  sequence (inclusive)
  * @param e1  an iterator to the end       of an input  sequence (exclusive)
  * @param b2 an iterator to the beginning of an input  sequence (inclusive)
  * @param e2 an iterator to the end       of an input  sequence (exclusive)
  * @param x  an iterator to the beginning of an output sequence (inclusive)
  * @return   an iterator to the end       of an output sequence (exclusive)
- * the sequences are of decimal digits
- * output the sum of the two input sequences into the output sequence
- * ([b1, e1) + [b2, e2)) => x
  */
 	template <typename II1, typename II2, typename OI>
 OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) 
@@ -231,15 +231,15 @@ OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 // ------------
 
 /**
+ * the sequences are of decimal digits
+ * output the difference of the two input sequences into the output sequence
+ * ([b1, e1) - [b2, e2)) => x
  * @param b1 an iterator to the beginning of an input  sequence (inclusive)
  * @param e1 an iterator to the end       of an input  sequence (exclusive)
  * @param b2 an iterator to the beginning of an input  sequence (inclusive)
  * @param e2 an iterator to the end       of an input  sequence (exclusive)
  * @param x  an iterator to the beginning of an output sequence (inclusive)
  * @return   an iterator to the end       of an output sequence (exclusive)
- * the sequences are of decimal digits
- * output the difference of the two input sequences into the output sequence
- * ([b1, e1) - [b2, e2)) => x
  */
 	template <typename II1, typename II2, typename OI>
 OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) 
@@ -312,15 +312,15 @@ OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 // -----------------
 
 /**
+ * the sequences are of decimal digits
+ * output the product of the two input sequences into the output sequence
+ * ([b1, e1) * [b2, e2)) => x
  * @param b1  an iterator to the beginning of an input  sequence (inclusive)
  * @param e1  an iterator to the end       of an input  sequence (exclusive)
  * @param b2 an iterator to the beginning of an input  sequence (inclusive)
  * @param e2 an iterator to the end       of an input  sequence (exclusive)
  * @param x  an iterator to the beginning of an output sequence (inclusive)
  * @return   an iterator to the end       of an output sequence (exclusive)
- * the sequences are of decimal digits
- * output the product of the two input sequences into the output sequence
- * ([b1, e1) * [b2, e2)) => x
  */
 	template <typename II1, typename II2, typename OI>
 OI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) 
@@ -383,15 +383,15 @@ OI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x)
 // --------------
 
 /**
+ * the sequences are of decimal digits
+ * output the division of the two input sequences into the output sequence
+ * ([b1, e1) / [b2, e2)) => x
  * @param b1 an iterator to the beginning of an input  sequence (inclusive)
  * @param e1 an iterator to the end       of an input  sequence (exclusive)
  * @param b2 an iterator to the beginning of an input  sequence (inclusive)
  * @param e2 an iterator to the end       of an input  sequence (exclusive)
  * @param x  an iterator to the beginning of an output sequence (inclusive)
  * @return   an iterator to the end       of an output sequence (exclusive)
- * the sequences are of decimal digits
- * output the division of the two input sequences into the output sequence
- * ([b1, e1) / [b2, e2)) => x
  */
 	template <typename II1, typename II2, typename OI>
 OI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) 
@@ -480,10 +480,10 @@ class Integer {
 	// -----------
 
 	/**
+	 * equal operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return true if the lhs Integer is equal to the rhs Integer
-	 * equal operator
 	 */
 	friend bool operator == (const Integer& lhs, const Integer& rhs) 
 	{
@@ -512,10 +512,10 @@ class Integer {
 	// -----------
 
 	/**
+	 * not equal operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return true if the lhs Integer is not equal to the rhs Integer
-	 * not equal operator
 	 */
 	friend bool operator != (const Integer& lhs, const Integer& rhs) 
 	{
@@ -527,10 +527,10 @@ class Integer {
 	// ----------
 
 	/**
+	 * less than operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return true if the lhs Integer is less than the rhs Integer
-	 * less than operator
 	 */
 	friend bool operator < (const Integer& lhs, const Integer& rhs) 
 	{
@@ -548,10 +548,10 @@ class Integer {
 	// -----------
 
 	/**
+	 * less than or equal to operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return true if the lhs Integer is less than or equal to the rhs Integer
-	 * less than or equal to operator
 	 */
 	friend bool operator <= (const Integer& lhs, const Integer& rhs) 
 	{
@@ -563,10 +563,10 @@ class Integer {
 	// ----------
 
 	/**
+	 * greater than operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return true if the lhs Integer is greater than the rhs Integer
-	 * greater than operator
 	 */
 	friend bool operator > (const Integer& lhs, const Integer& rhs) 
 	{
@@ -578,10 +578,10 @@ class Integer {
 	// -----------
 
 	/**
+	 * greater than or equal to operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return true if the lhs Integer is greater than or equal to the rhs Integer
-	 * greater than or equal to operator
 	 */
 	friend bool operator >= (const Integer& lhs, const Integer& rhs) 
 	{
@@ -593,10 +593,10 @@ class Integer {
 	// ----------
 
 	/**
+	 * addition operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return an Integer that is the sum of the lhs Integer and rhs Integer
-	 * addition operator
 	 */
 	friend Integer operator + (Integer lhs, const Integer& rhs) 
 	{
@@ -608,10 +608,10 @@ class Integer {
 	// ----------
 
 	/**
+	 * subtraction operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return an Integer that is the difference of the lhs Integer and rhs Integer
-	 * subtraction operator
 	 */
 	friend Integer operator - (Integer lhs, const Integer& rhs) 
 	{
@@ -623,10 +623,10 @@ class Integer {
 	// ----------
 
 	/**
+	 * multiplication operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return an Integer that is the product of the lhs Integer and rhs Integer
-	 * multiplication operator
 	 */
 	friend Integer operator * (Integer lhs, const Integer& rhs) 
 	{
@@ -638,11 +638,11 @@ class Integer {
 	// ----------
 
 	/**
+	 * division operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return an Integer that is the quotient of the lhs Integer and rhs Integer
 	 * @throws invalid_argument if (rhs == 0)
-	 * division operator
 	 */
 	friend Integer operator / (Integer lhs, const Integer& rhs) 
 	{
@@ -654,11 +654,11 @@ class Integer {
 	// ----------
 
 	/**
+	 * modulus operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the right hand side Integer
 	 * @return an Integer that is the modulo of the lhs Integer and rhs Integer
 	 * @throws invalid_argument if (rhs <= 0)
-	 * modulus operator
 	 */
 	friend Integer operator % (Integer lhs, const Integer& rhs) 
 	{
@@ -670,11 +670,11 @@ class Integer {
 	// -----------
 
 	/**
+	 * shift left operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the number of positions to shift the Integer
 	 * @return an Integer that is shifted n positions to the left
 	 * @throws invalid_argument if (rhs < 0)
-	 * shift left operator
 	 */
 	friend Integer operator << (Integer lhs, int rhs) 
 	{
@@ -686,12 +686,12 @@ class Integer {
 	// -----------
 
 	/**
+	 * shift right operator
 	 * @param lhs - the left hand side Integer
 	 * @param rhs - the number of positions to shift the Integer
 	 * @return an Integer that is shifted n positions to the right
 	 * @throws invalid_argument if (rhs < 0)
-	 * shift right operator
- */
+ 	*/
 	friend Integer operator >> (Integer lhs, int rhs) 
 	{
 		return lhs >>= rhs;
@@ -702,6 +702,7 @@ class Integer {
 	// -----------
 
 	/**
+	 * shift left operator
 	 * @param lhs - an output stream
 	 * @param rhs - the right hand side Integer
 	 * @return an output stream that contains the string representation of the Integer
@@ -723,10 +724,10 @@ class Integer {
 	// ---
 
 	/**
-	 * @param x - an Integer - copy by value
-	 * @return an Integer that is the absolute value of the Integer parameter
 	 * absolute value operation
 	 * does NOT modify the argument
+	 * @param x - an Integer - copy by value
+	 * @return an Integer that is the absolute value of the Integer parameter
 	 */
 	friend Integer abs (Integer x) 
 	{
@@ -738,11 +739,11 @@ class Integer {
 	// ---
 
 	/**
+	 * power operation
+	 * does NOT modify the argument
 	 * @param x - an Integer that is the base number for the power function - copy by value
 	 * @param e - the exponent of the power function
 	 * @return an Integer that is the power of the numbers x and e
-	 * power operation
-	 * does NOT modify the argument
 	 * @throws invalid_argument if (x == 0) && (e == 0)
 	 * @throws invalid_argument if (e < 0)
 	 */
@@ -779,8 +780,8 @@ class Integer {
 	}
 
 	/**
-	 * @param value - an int value which is used to initialize the Integer
 	 * Initialize the Integer using specified value
+	 * @param value - an int value which is used to initialize the Integer
 	 */
 	void setup_integer(int& value)
 	{
@@ -809,8 +810,8 @@ class Integer {
 	}
 
 	/**
-	 * @param value - an rvalue reference which is used to initialize the single digit
 	 * Set the Integer to a single digit positive value 
+	 * @param value - an rvalue reference which is used to initialize the single digit
 	 */
 	void set_single_digit(int&& value)
 	{
@@ -823,8 +824,8 @@ class Integer {
 	}
 
 	/**
-	 * @param e - an iterator to the Most Significant Digit(MSD) in the Integer
 	 * Determine the number of digits in the Integer
+	 * @param e - an iterator to the Most Significant Digit(MSD) in the Integer
 	 */
 	void set_digit_count(typename C::iterator e)
 	{
@@ -833,8 +834,8 @@ class Integer {
 	}
 
 	/**
-	 * @param size - the expected size of the container implementing Integer
 	 * Resize the container implementing Integer to the appropriate size
+	 * @param size - the expected size of the container implementing Integer
 	 */
 	void resize(typename C::size_type size)
 	{	
@@ -849,8 +850,8 @@ class Integer {
 	// ------------
 
 	/**
-	 * @param value - an int value which is used to initialize the Integer 
 	 * Construct an Integer using an int argument
+	 * @param value - an int value which is used to initialize the Integer 
 	 */
 	Integer (int value)
 	{
@@ -859,9 +860,9 @@ class Integer {
 	}
 
 	/**
+	 * Construct an Integer using a std:string argument
 	 * @param value - a std::string value which is used to initialize the Integer
 	 * @throws invalid_argument if value is not a valid representation of an Integer
-	 * Construct an Integer using a std:string argument
 	 */
 	explicit Integer (const std::string& value)
 	{
@@ -891,8 +892,8 @@ class Integer {
 	// ----------
 
 	/**
-	 * @return an Integer with the opposite value of this Integer
 	 * negation operator
+	 * @return an Integer with the opposite value of this Integer
 	 */
 	Integer operator - () const 
 	{
@@ -908,8 +909,8 @@ class Integer {
 	// -----------
 
 	/**
-	 * @return a Integer reference incremented by 1
 	 * Pre-increment Operator
+	 * @return a Integer reference incremented by 1
 	 */
 	Integer& operator ++ () 
 	{
@@ -919,9 +920,9 @@ class Integer {
 	}
 
 	/**
-	 * @return an Integer incremented by 1
-	 * Does not effect the Integer argument
 	 * Post-Increment Operator
+	 * Does not effect the Integer argument
+	 * @return an Integer incremented by 1
 	 */
 	Integer operator ++ (int) 
 	{
@@ -936,8 +937,8 @@ class Integer {
 	// -----------
 
 	/**
-	 * @return a Integer reference decremented by 1
 	 * Pre-decrement Operator
+	 * @return a Integer reference decremented by 1
 	 */
 	Integer& operator -- () 
 	{
@@ -947,9 +948,9 @@ class Integer {
 	}
 
 	/**
-	 * @return an Integer decremented by 1
 	 * Does not effect the Integer argument
 	 * Post-Decrement Operator
+	 * @return an Integer decremented by 1
 	 */
 	Integer operator -- (int) 
 	{
@@ -964,9 +965,9 @@ class Integer {
 	// -----------
 
 	/**
+	 * Addition Assignent Operator
 	 * @param rhs - the right hand side Integer
 	 * @return a Integer reference that is the sum of this Integer and the rhs
-	 * Addition Assignent Operator
 	 */
 	Integer& operator += (const Integer& rhs) 
 	{
@@ -1020,9 +1021,9 @@ class Integer {
 	// -----------
 
 	/**
+	 * Subtraction Assignent Operator
 	 * @param rhs - the right hand side Integer
 	 * @return a Integer reference that is the difference of this Integer and the rhs
-	 * Subtraction Assignent Operator
 	 */
 	Integer& operator -= (const Integer& rhs) 
 	{
@@ -1072,9 +1073,9 @@ class Integer {
 	// -----------
 
 	/**
+	 * Multiplication Assignent Operator
 	 * @param rhs - the right hand side Integer
 	 * @return a Integer reference that is the product of this Integer and the rhs
-	 * Multiplication Assignent Operator
 	 */
 	Integer& operator *= (const Integer& rhs) 
 	{
@@ -1103,10 +1104,10 @@ class Integer {
 	// -----------
 
 	/**
+	 * Division Assignent Operator
 	 * @param rhs - the right hand side Integer
 	 * @return a Integer reference that is the quotient of this Integer and the rhs
 	 * @throws invalid_argument if (rhs == 0)
-	 * Division Assignent Operator
 	 */
 	Integer& operator /= (const Integer& rhs) 
 	{
@@ -1146,10 +1147,10 @@ class Integer {
 	// -----------
 
 	/**
+	 * Modulo Assignment Operator
 	 * @param rhs - the right hand side Integer
 	 * @return a Integer reference that is the modulo of this Integer and the rhs
 	 * @throws invalid_argument if (rhs <= 0)
-	 * Modulo Assignment Operator
 	 */
 	Integer& operator %= (const Integer& rhs) 
 	{
@@ -1170,10 +1171,10 @@ class Integer {
 	// ------------
 
 	/**
+	 * shift left assignement operator
 	 * @param n - the number of positions to shift the Integer
 	 * @return an Integer Reference that is shifted n positions to the left
 	 * @throws invalid_argument if (rhs < 0)
-	 * shift left assignement operator
 	 */
 	Integer& operator <<= (int n) 
 	{
@@ -1195,10 +1196,10 @@ class Integer {
 	// ------------
 
 	/**
+	 * shift right assignement operator
 	 * @param n - the number of positions to shift the Integer
 	 * @return an Integer Reference that is shifted n positions to the right
 	 * @throws invalid_argument if (rhs < 0)
-	 * shift right assignement operator
 	 */
 	Integer& operator >>= (int n) 
 	{
@@ -1225,8 +1226,8 @@ class Integer {
 	// ---
 
 	/**
-	 * @return an Integer Reference that is the absolute value of this Integer 
 	 * absolute value operation
+	 * @return an Integer Reference that is the absolute value of this Integer 
 	 */
 	Integer& abs () 
 	{
@@ -1240,9 +1241,9 @@ class Integer {
 	// ---
 
 	/**
+	 * power operation
 	 * @param e - the exponent of the power function
 	 * @return an Integer Reference that is the power of this Integer and e
-	 * power operation
 	 * @throws invalid_argument if (this == 0) && (e == 0)
 	 * @throws invalid_argument if (e < 0)
 	 */

@@ -87,5 +87,6 @@ var searchData=
   ['test_5fvalid_5fdivision_5fzero',['test_valid_division_zero',['../structTestInteger.html#ae49249bcaf8dd2a0bcdff79fd554c9ab',1,'TestInteger']]],
   ['test_5fvalid_5fzero',['test_valid_zero',['../structTestInteger.html#a61b52a28e860588d8bc7acd02045eba5',1,'TestInteger']]],
   ['testinteger',['TestInteger',['../structTestInteger.html',1,'']]],
-  ['testinteger_2ec_2b_2b',['TestInteger.c++',['../TestInteger_8c_09_09.html',1,'']]]
+  ['testinteger_2ec_2b_2b',['TestInteger.c++',['../TestInteger_8c_09_09.html',1,'']]],
+  ['timer_5fmode',['TIMER_MODE',['../ECInteger_8c_09_09.html#af2a9f923fe45bcba36e26b19886d9d81',1,'ECInteger.c++']]]
 ];
