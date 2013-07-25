@@ -88,6 +88,14 @@ OI shift_right_digits (II b, II e, int n, OI x)
 			++x;
 		}
 	}
+    else if(e - b > n)
+    {
+        for(int i = 0; i < n; ++i)
+        {
+            *x = 0;
+            ++x;
+        }    
+    }
 	else
 	{
 		// Transfer values to x
@@ -1213,7 +1221,7 @@ class Integer {
 		shift_right_digits(container.begin(), container.begin() + digits, n, container.begin());
 		digits -= n;
 
-		if(digits == 0)
+		if(digits <= 0)
 			set_single_digit(0);
 			
 
